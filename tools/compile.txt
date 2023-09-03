@@ -1,0 +1,5 @@
+ASM TO BIN
+nasm -f bin -o Boot.bin Boot.asm
+
+IMG FILE
+dd if=Boot.bin of=Boot.img bs=512 conv=notrunc

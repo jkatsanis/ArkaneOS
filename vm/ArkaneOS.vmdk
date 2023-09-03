@@ -6,9 +6,9 @@ parentCID=ffffffff
 createType="twoGbMaxExtentSparse"
 
 # Extent description
-RW 8323072 SPARSE "ArcaneOS-s001.vmdk"
-RW 8323072 SPARSE "ArcaneOS-s002.vmdk"
-RW 131072 SPARSE "ArcaneOS-s003.vmdk"
+RW 8323072 SPARSE "ArkaneOS-s001.vmdk"
+RW 8323072 SPARSE "ArkaneOS-s002.vmdk"
+RW 131072 SPARSE "ArkaneOS-s003.vmdk"
 
 # The Disk Data Base 
 #DDB
@@ -17,6 +17,6 @@ ddb.adapterType = "ide"
 ddb.geometry.cylinders = "16383"
 ddb.geometry.heads = "16"
 ddb.geometry.sectors = "63"
-ddb.longContentID = "3c98f5be6eecab243bcb00acfffffffe"
-ddb.uuid = "60 00 C2 96 29 30 b6 d1-9e 8a 2d 83 0a 19 fe dd"
+ddb.longContentID = "dab089975bbde9d805882c2dfffffffe"
+ddb.uuid = "60 00 C2 9c 71 0a c5 ff-0c 88 36 a7 6b 7e f5 03"
 ddb.virtualHWVersion = "19"

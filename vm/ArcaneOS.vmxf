@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<Foundry>
-<VM>
-<VMId type="string">52 a2 de 7f 92 5c 0c 58-72 fb 23 7c ea 5e 24 0a</VMId>
-<ClientMetaData>
-<clientMetaDataAttributes/>
-<HistoryEventList/></ClientMetaData>
-<vmxPathName type="string">ArcaneOS.vmx</vmxPathName></VM></Foundry>

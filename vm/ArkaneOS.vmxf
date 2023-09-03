@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<Foundry>
+<VM>
+<VMId type="string">52 f7 b1 ef 28 07 21 32-04 cf cb 3b fc f3 26 2a</VMId>
+<ClientMetaData>
+<clientMetaDataAttributes/>
+<HistoryEventList/></ClientMetaData>
+<vmxPathName type="string">ArkaneOS.vmx</vmxPathName></VM></Foundry>
