@@ -2,7 +2,7 @@ ASM TO BIN
 nasm -f bin -o Boot.bin Boot.asm
 
 IMG FILE
-dd if=Boot.bin of=Boot.img bs=512 conv=notrunc
+dd if=result.bin of=Arkane.img bs=512 conv=notrunc
 
 FLP FILE
 dd if=file.bin of=Arkane.flp
@@ -17,4 +17,4 @@ MERGE
 cat one.bin two.bin > result.bin
 
 QEMU EMULATOR
-sudo qemu-system-x86_64 -fda result.img
+sudo qemu-system-x86_64 -fda Arkane.img
