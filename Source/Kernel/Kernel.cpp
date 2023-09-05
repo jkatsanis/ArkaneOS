@@ -1,7 +1,22 @@
-#include "UIWindow.h"
+#include "TextRenderer/TextRenderer.h"
 
-extern "C" void main(){
-    UIWindow window = UIWindow();
-    *(char*)0xb8000 = window.data;
+class Kernel
+{
+private:
+    TextRenderer m_text_renderer;
+public:
+    void KernelUpdate();
+};
+
+void Kernel::KernelUpdate()
+{
+    m_text_renderer.WriteCharacter('K', 0xFFF, 4, 10 ,10);
+}
+
+
+extern "C" void main()
+{
+    Kernel kernel;
+    kernel.KernelUpdate();
     return;
 }
