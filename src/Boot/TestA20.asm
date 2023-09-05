@@ -1,11 +1,9 @@
 ; Test the A20 Line
 testA20:
-
     pusha
-
     mov ax, [0x7dfe]  ; 7dfe = 7c00+510 (memory location of magic number)
     mov dx, ax
-    call printh
+    ; call printh
     push bx
     mov bx, 0xffff
     mov es, bx
@@ -14,7 +12,7 @@ testA20:
     mov bx, 0x7e0e    
 
     mov dx, [es:bx]  
-    call printh
+    ; call printh
     cmp ax, dx      
     je .cont         
 
@@ -34,7 +32,7 @@ testA20:
 
     mov bx, 0x7E0F
     mov dx, [es:bx]
-    call printh
+    ; call printh
 
     cmp ax, dx
     je .exit
@@ -42,7 +40,6 @@ testA20:
     popa
     xor ax, 1
     ret
-
 .exit
     popa
     xor ax, ax
