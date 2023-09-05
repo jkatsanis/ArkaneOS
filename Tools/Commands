@@ -1,0 +1,5 @@
+RUN QEMU
+qemu-system-x86_64 main.bin
+
+SET SYSTEM VARIABLE
+export DISPLAY=:1
