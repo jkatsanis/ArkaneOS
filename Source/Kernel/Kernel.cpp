@@ -1,6 +1,7 @@
-#include "KernelTest.h"
+#include "UIWindow.h"
 
 extern "C" void main(){
-    *(char*)0xb8000 = h.USE;
+    UIWindow window = UIWindow();
+    *(char*)0xb8000 = window.data;
     return;
 }
