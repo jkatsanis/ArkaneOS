@@ -48,10 +48,10 @@ ZeroSeg:
 %include "TestA20.asm"
 %include "EnableA20.asm"
 
-STR: db "Hello OS, 2ND sector", 0x0a, 0x0d, 0
-DISK_ERR_MSG: db "Error Loading Disk.", 0x0a, 0x0d, 0
-DONE_A20: db "A20 DONE", 0x0a, 0x0d, 0
-NO_A20: db "A20 FAILED", 0x0a, 0x0d, 0
+STR: db "2ND S", 0x0a, 0x0d, 0
+DISK_ERR_MSG: db "Disk !.", 0x0a, 0x0d, 0
+DONE_A20: db "A20", 0x0a, 0x0d, 0
+NO_A20: db "A20 !", 0x0a, 0x0d, 0
 CPU64_NOT_SUPPORTED: db "LM !", 0x0a, 0x0d, 0
 CPU64_SUPPORTED: db "LM", 0x0a, 0x0d, 0
 
@@ -64,8 +64,66 @@ sector_two:
     mov si, STR
     call printf
     call checklm
-    jmp $
+    cli
+    mov edi, 0x1000
+    mov cr3, edi
+    xor eax, eax
+    mov ecx, 4096
+    rep stosd 
+    mov edi, 0x1000    
+
+    mov dword [edi], 0x2003
+    add edi, 0x1000
+    mov dword [edi], 0x3003
+    add edi, 0x1000
+    mov dword [edi], 0x4003
+    add edi, 0x1000
+
+    mov dword ebx, 3
+    mov ecx, 512
+
+.setEntry
+    mov dword [edi], ebx
+    add ebx, 0x1000
+    add edi, 8
+    loop .setEntry
+
+    mov eax, cr4
+    or eax, 1 << 5
+    mov cr4, eax
+
+    mov ecx, 0xc0000080
+    rdmsr
+    or eax, 1 << 8  ; Flipping the 8th bit to get into long mode
+    wrmsr
+    
+    mov eax, cr0
+    or eax, 1 << 31 ; Protected mode
+    or eax, 1 << 0  ; Paging
+    mov cr0, eax
+
+    lgdt [GDT.Pointer]
+    jmp GDT.Code:long_mode
 
 %include "CheckLM.asm"
+%include "Gdt.asm"
+
+; Being in longmode
+bits 64
+long_mode:
+
+    ; clearing the screen blue
+    mov edi, VID_MEM
+    mov rax, 0x1f201f201f201f201f20
+    mov ecx, 500
+    mov [VID_MEM], rax
+    rep stosq
+
+    mov rax, 0x1f741f731f651f54
+    mov [VID_MEM], rax
+
+    hlt
+
+VID_MEM equ 0xB8000    
 
 times 512 db 0
