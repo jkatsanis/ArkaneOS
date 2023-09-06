@@ -5,6 +5,7 @@ KERNEL_DIR = Source/Kernel/
 SRC_FILES := $(shell find $(KERNEL_DIR) -name '*.cpp')
 
 compile:
+	make clean
 	./build.sh
 	@echo Compiling assembly....
 	nasm -fbin  -I$(BOOT_DIR) $(BOOT_DIR)Boot.asm -o $(BIN_DIR)/Boot.bin 
@@ -23,5 +24,5 @@ run:
 	qemu-system-x86_64 $(BIN_DIR)/OS.bin
 
 clean: 
-	rm $(BIN_DIR)/*.o
-	rm $(BIN_DIR)/*.bin
+	rm -f $(BIN_DIR)/*.o
+	rm -f $(BIN_DIR)/*.bin

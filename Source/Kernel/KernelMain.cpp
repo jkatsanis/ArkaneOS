@@ -2,8 +2,12 @@
 
 void Arkn::Kernel::KernelUpdate()
 {
+    Arkn::String str("Hello OS");
+    
+    Arkn::TextRenderer::WriteString(str, Arkn::Point(10, 10));    
+
     this->m_cursor.DisableCursor();
-    this->m_text_renderer.WriteCharacter('M', 0xFFF, 4, 10 ,10);
+
     while (1)
     {
         
