@@ -1,9 +1,17 @@
-#include "TextRenderer/TextRenderer.h"
+#pragma once
 
-class Kernel
+#include "TextRenderer/TextRenderer.h"
+#include "Standard/Cursor.h"
+
+namespace Arkn
 {
-private:
-    TextRenderer m_text_renderer;
-public:
-    void KernelUpdate();
-};
+    class Kernel
+    {
+    private:
+        Arkn::TextRenderer m_text_renderer;
+        Arkn::Cursor m_cursor;
+
+    public:
+        void KernelUpdate();
+    };
+}

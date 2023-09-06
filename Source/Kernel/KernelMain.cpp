@@ -1,15 +1,20 @@
 #include "KernelMain.h"
 
-void Kernel::KernelUpdate()
+void Arkn::Kernel::KernelUpdate()
 {
-    this->m_text_renderer.WriteCharacter('K', 0xFFF, 4, 10 ,10);
+    this->m_cursor.DisableCursor();
+    this->m_text_renderer.WriteCharacter('M', 0xFFF, 4, 10 ,10);
+    while (1)
+    {
+        
+    }    
 }
 
 // ====== CALL FROM ASM =========
 
-extern "C" void main()
+extern "C" int main()
 {
-    Kernel kernel;
+    Arkn::Kernel kernel;
     kernel.KernelUpdate();
-    return;
+    return 1;
 }
