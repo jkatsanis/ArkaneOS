@@ -1,18 +1,11 @@
-#include "TextRenderer/TextRenderer.h"
-
-class Kernel
-{
-private:
-    TextRenderer m_text_renderer;
-public:
-    void KernelUpdate();
-};
+#include "KernelMain.h"
 
 void Kernel::KernelUpdate()
 {
-    m_text_renderer.WriteCharacter('K', 0xFFF, 4, 10 ,10);
+    this->m_text_renderer.WriteCharacter('K', 0xFFF, 4, 10 ,10);
 }
 
+// ====== CALL FROM ASM =========
 
 extern "C" void main()
 {
