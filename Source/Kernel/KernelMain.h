@@ -4,6 +4,7 @@
 #include "Standard/Cursor.h"
 #include "Standard/String.h"
 #include "Standard/Point.h"
+#include "Standard/IO.h"
 
 namespace Arkn
 {
@@ -13,6 +14,8 @@ namespace Arkn
         Arkn::Cursor m_cursor;
 
     public:
+        Kernel();
+
         void KernelUpdate();
     };
 }

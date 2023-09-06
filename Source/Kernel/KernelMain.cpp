@@ -1,16 +1,19 @@
 #include "KernelMain.h"
 
+Arkn::Kernel::Kernel()
+{
+    this->m_cursor.DisableCursor();
+}
+
 void Arkn::Kernel::KernelUpdate()
 {
-    Arkn::String str("Hello OS");
-    
-    Arkn::TextRenderer::WriteString(str, Arkn::Point(10, 10));    
-
-    this->m_cursor.DisableCursor();
+    Arkn::String yo("Afghane");
+    TextRenderer::WriteLine(yo);
 
     while (1)
     {
-        
+       //  uint8_t keypressed = Arkn::IO::Inb(0x60);
+       //  Arkn::TextRenderer::WriteLine(keypressed);
     }    
 }
 

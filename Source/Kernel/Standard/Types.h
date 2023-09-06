@@ -2,6 +2,9 @@
 
 // ===== INTS ======
 
+#define INT_MIN -2147483648
+#define INT_MAX 2147483648
+
 typedef unsigned char uint8_t;
 typedef unsigned short uint16_t;
 typedef unsigned int uint32_t;

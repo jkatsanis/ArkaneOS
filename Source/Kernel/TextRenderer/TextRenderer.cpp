@@ -18,3 +18,14 @@ void Arkn::TextRenderer::WriteString(const Arkn::String& string, Arkn::Point poi
         point.x += 1;
     }
 }
+
+void Arkn::TextRenderer::WriteLine(const Arkn::String& line)
+{
+    const Arkn::Point point(0, Arkn::TextRenderer::s_current_line_pos_y);
+
+    Arkn::TextRenderer::WriteString(line, point);
+
+    Arkn::TextRenderer::s_current_line_pos_y++;
+}
+
+uint32_t Arkn::TextRenderer::s_current_line_pos_y = 0;

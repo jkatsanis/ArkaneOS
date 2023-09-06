@@ -49,6 +49,7 @@ start_protected_mode:
 	mov gs, ax
 	mov ebp, 0x90000		; 32 bit stack base pointer
 	mov esp, ebp
+
     jmp KERNEL_LOCATION
 
 %include "Printf.asm"
