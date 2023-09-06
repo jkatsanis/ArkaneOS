@@ -5,7 +5,12 @@ KERNEL_DIR = Source/Kernel/
 compile:
 	nasm -fbin  -I$(BOOT_DIR) $(BOOT_DIR)Boot.asm -o $(SOURCE_DIR)/Boot.bin 
 	nasm $(BOOT_DIR)KernelEntry.asm -f elf -o $(SOURCE_DIR)/KernelEntry.o
-	i386-elf-gcc -ffreestanding -m32 -g -c $(KERNEL_DIR)Kernel.cpp -o $(SOURCE_DIR)/Kernel.o
+	i386-elf-gcc -ffreestanding -m32 -g -c $(KERNEL_DIR)KernelMain.cpp -o $(SOURCE_DIR)/KernelMain.o
+	i386-elf-gcc -ffreestanding -m32 -g -c $(KERNEL_DIR)/TextRenderer/TextRenderer.cpp -o $(SOURCE_DIR)/TextRenderer.o
+
+	ld -m elf_i386 -r -o $(SOURCE_DIR)/Kernel.o $(SOURCE_DIR)/KernelMain.o $(SOURCE_DIR)/TextRenderer.o
+
+
 	nasm $(BOOT_DIR)Zeroes.asm -f bin -o $(SOURCE_DIR)/Zeroes.bin
 
 	i386-elf-ld -o $(SOURCE_DIR)/FullKernel.bin -Ttext 0x1000 $(SOURCE_DIR)/KernelEntry.o $(SOURCE_DIR)/Kernel.o --oformat binary
