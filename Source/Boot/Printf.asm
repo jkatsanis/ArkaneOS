@@ -12,3 +12,4 @@ printf:
         int 0x10
         add si, 1
         jmp str_loop
+

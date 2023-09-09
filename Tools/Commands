@@ -3,10 +3,3 @@ qemu-system-x86_64 main.bin
 
 SET SYSTEM VARIABLE
 export DISPLAY=:1
-
-$(foreach fr, $(fruits), echo $(fr);)
-
-NOTE:
-use qemu
-uxe a X window server
-have the cross compiler installed

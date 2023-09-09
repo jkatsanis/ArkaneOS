@@ -1,26 +1,28 @@
-GDT_start:
-    GDT_null:
-        dd 0x0
-        dd 0x0
+GDT:
+    .Null: equ $ - GDT
+    dw 0
+    dw 0
+    db 0
+    db 0
+    db 0
+    db 0
 
-    GDT_code:
-        dw 0xffff
-        dw 0x0
-        db 0x0
-        db 0b10011010
-        db 0b11001111
-        db 0x0
+    .Code: equ $ - GDT
+    dw 0
+    dw 0
+    db 0
+    db 10011000b
+    db 00100000b
+    db 0
 
-    GDT_data:
-        dw 0xffff
-        dw 0x0
-        db 0x0
-        db 0b10010010
-        db 0b11001111
-        db 0x0
+    .Data: equ $ - GDT
+    dw 0
+    dw 0
+    db 0
+    db 10000000b
+    db 0
+    db 0
 
-GDT_end:
-
-GDT_descriptor:
-    dw GDT_end - GDT_start - 1
-    dd GDT_start
+    .Pointer
+    dw $ - GDT - 1
+    dq GDT
