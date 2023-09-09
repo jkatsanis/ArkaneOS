@@ -101,7 +101,7 @@ sector_two:
     
     mov eax, cr0
     or eax, 1 << 31 ; Protected mode
-    or eax, 1 << 0  ; Paging
+    or eax, 1 << 0  ; Paging 
     mov cr0, eax
 
     lgdt [GDT.Pointer]
