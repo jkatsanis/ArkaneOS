@@ -11,7 +11,7 @@ readDisk:
     mov bx, 0
     mov es, bx
     pop bx
-    mov bx, 0x7C00 + 512 ; Loading the actual segement 512 bytes after the bootloader
+    mov bx, 0x7C00 + 512 
 
     int 0x13
 

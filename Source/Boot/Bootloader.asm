@@ -28,7 +28,7 @@ ZeroSeg:
     mov dl, 0x80
     mov al, 2		
     mov cl, 2		
-    mov bx, sector_two		
+    mov bx, 0x100000		
     call readDisk
 
     ; Checking if A20 line is enabled
@@ -58,9 +58,7 @@ CPU64_SUPPORTED: db "LM", 0x0a, 0x0d, 0
 times 510-($-$$) db 0   
 dw 0xAA55
 
-;;;;;;;;;;;;;;;; S TWO ;;;;;;;;
-
-sector_two:
+sector_two: 
     mov si, STR
     call printf
     call checklm
