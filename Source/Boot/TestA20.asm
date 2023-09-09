@@ -40,7 +40,7 @@ testA20:
     popa
     xor ax, 1
     ret
-.exit
+.exit:
     popa
     xor ax, ax
     ret

@@ -1,5 +1,9 @@
-org 0x7C00
-bits 16
+[org 0x7C00]
+[bits 16]
+
+; Macros
+%define KERNEL_SIZE 512 ; Kernel syze in bytes
+
 
 section .text
     global main
@@ -26,7 +30,7 @@ ZeroSeg:
 
     ; load sectors
     mov dl, 0x80
-    mov al, 2		
+    mov al, KERNEL_SIZE / 512	
     mov cl, 2		
     mov bx, 0x100000		
     call readDisk
@@ -80,7 +84,7 @@ sector_two:
     mov dword ebx, 3
     mov ecx, 512
 
-.setEntry
+.setEntry:
     mov dword [edi], ebx
     add ebx, 0x1000
     add edi, 8

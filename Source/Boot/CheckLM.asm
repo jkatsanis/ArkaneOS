@@ -27,7 +27,7 @@ checklm:
     popa
     ret
 
-.done
+.done: 
     popa
     mov si, CPU64_NOT_SUPPORTED
     call printf

@@ -23,6 +23,6 @@ GDT:
     db 0
     db 0
 
-    .Pointer
+    .Pointer: 
     dw $ - GDT - 1
     dq GDT

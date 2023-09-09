@@ -11,4 +11,4 @@ kernel_main:
     mov [VIDEO_MEM], rax
     jmp $
 
-times 512 db 0   
+times KERNEL_SIZE+512-($-$$) db 0   ; + 512 bc fucking bootloader
