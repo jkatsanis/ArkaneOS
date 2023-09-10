@@ -3,11 +3,11 @@ printf:
     str_loop: 
         mov al, [si]
         cmp al, 0
-        jne print_char
+        jne print_char_rlm
         popa
         ret
 
-    print_char:
+    print_char_rlm:
         mov ah, 0x0e
         int 0x10
         add si, 1
