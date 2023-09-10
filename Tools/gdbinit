@@ -1,0 +1,11 @@
+# Set architecture to x86
+set architecture i8086
+
+# Set the target to remote debugging with QEMU
+target remote localhost:1234
+
+# Load your OS binary
+file ../Bin/Debug/ArkaneOS.bin
+
+# Set breakpoints or perform other setup as needed
+# breakpoint main
