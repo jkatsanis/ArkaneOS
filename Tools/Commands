@@ -3,3 +3,12 @@ qemu-system-x86_64 main.bin
 
 SET SYSTEM VARIABLE
 export DISPLAY=:1
+
+NEED TO RUN THIS WITH ROOT
+
+GDB
+make run
+gdb os.bin
+target remote localhost:1234
+Close browsers (retarded)
+-> Now debug lol
