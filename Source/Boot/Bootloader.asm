@@ -105,7 +105,7 @@ sector_two:
     mov cr0, eax
 
     lgdt [GDT.Pointer]
-    jmp GDT.Code:kernel_main
+    jmp GDT.Code:kernel_setup
 
 %include "CheckLM.asm"
 %include "Gdt.asm"

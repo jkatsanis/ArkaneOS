@@ -2,6 +2,8 @@ section .data
     cursor_x dd 0
     cursor_y dd 0
 
+inc_cursor_x:
+    inc dword [cursor_x]
 
 print_string:
     lodsb
@@ -26,6 +28,11 @@ print_char:
     
     stosw
     ret 
+
+print_char_line:
+    call print_char
+    jmp done
+    ret
 
 done:
     mov dword [cursor_x], 0
