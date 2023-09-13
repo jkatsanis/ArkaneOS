@@ -1,3 +1,5 @@
+%define END_OF_LINE 50
+
 section .data
     cursor_x dd 0
     cursor_y dd 0
@@ -32,6 +34,23 @@ print_char:
 print_char_line:
     call print_char
     jmp done
+    ret
+
+print_char_column:
+    call print_char
+    inc dword [cursor_x]
+    call check_for_new_line
+    ret
+
+check_for_new_line:
+    mov al, [cursor_x]
+    cmp al, END_OF_LINE
+    jae create_new_line
+    ret
+
+create_new_line:
+    inc dword [cursor_y]
+    mov dword [cursor_x], 0
     ret
 
 done:
