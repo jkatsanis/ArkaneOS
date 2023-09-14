@@ -67,7 +67,6 @@ create_new_line:
     mov dword [cursor_x], 0
     ret
 
-
 done_string_line:
     mov dword [cursor_x], 0
     inc dword [cursor_y]

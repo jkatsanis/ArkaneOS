@@ -1,4 +1,4 @@
-%define INPUT_BUFFER_SIZE 10
+%define INPUT_BUFFER_SIZE 20
 
 ; Note that the input buffer does not control the UI
 
