@@ -5,7 +5,7 @@ DEBUG_DIR := ../Bin/Debug
 # RELEASE
 
 compile: 
-	nasm -f bin -IBoot -IKernel Boot/Bootloader.asm -o $(RELEASE_DIR)/$(OS_NAME).bin
+	nasm -f bin -IBoot -IKernel -IKernel/KeyBoard Boot/Bootloader.asm -o $(RELEASE_DIR)/$(OS_NAME).bin
 
 run:
 	qemu-system-x86_64 $(RELEASE_DIR)/$(OS_NAME).bin

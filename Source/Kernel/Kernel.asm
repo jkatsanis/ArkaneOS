@@ -2,10 +2,8 @@
 
 %include "TextRenderer/Print.asm"
 %include "KeyBoard/KeyBoard.asm"
-
-; Strings
-
-t_string: db "Hello Josef", 0
+%include "Data/String.asm"
+%include "Terminal/Terminal.asm"
 
 kernel_setup:
     mov edi, VIDEO_MEM 
@@ -13,11 +11,14 @@ kernel_setup:
     mov ecx, 500
     mov [VIDEO_MEM], rax
     rep stosq
+    call write_command
     call kernel_main
 
 kernel_main:
 
     call read_key
+    call check_for_sent_command
+
 
     jmp kernel_main
 

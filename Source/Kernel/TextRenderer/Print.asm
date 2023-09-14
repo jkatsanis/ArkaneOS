@@ -10,10 +10,18 @@ inc_cursor_x:
 print_string:
     lodsb
     cmp al, 0
-    je done  
+    je done_string 
     call print_char
     inc dword [cursor_x]    
     jmp print_string
+
+print_string_line:
+    lodsb
+    cmp al, 0
+    je done_string_line  
+    call print_char
+    inc dword [cursor_x]    
+    jmp print_string_line
 
 print_char:
     mov edi, VIDEO_MEM  
@@ -33,7 +41,7 @@ print_char:
 
 print_char_line:
     call print_char
-    jmp done
+    jmp done_string_line
     ret
 
 print_char_column:
@@ -53,7 +61,11 @@ create_new_line:
     mov dword [cursor_x], 0
     ret
 
-done:
+
+done_string_line:
     mov dword [cursor_x], 0
     inc dword [cursor_y]
+    ret
+
+done_string:
     ret
