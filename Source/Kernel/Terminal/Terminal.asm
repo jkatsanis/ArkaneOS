@@ -9,7 +9,7 @@ check_for_sent_command:
     ret
 
 check_for_sent_command_loop:
-    mov cl, '-' ; 0x9C is the enter released thingy
+    mov cl, ENTER_SYMBOL ; 0x9C is the enter released thingy
 
     cmp cl, [input_buffer + edi]
     je enter_key_found
@@ -27,8 +27,14 @@ enter_key_not_found:
     ret
 
 enter_key_found:
-    mov esi, pressed_enter
-    call print_string
+    call process_command  
     
+    ; Clearing the input buffer
     call clear_input_buffer
     ret    
+
+process_command:
+    call create_new_line
+    mov esi, shell_text
+    call print_string
+    ret

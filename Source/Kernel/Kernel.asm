@@ -1,5 +1,6 @@
 %define VIDEO_MEM 0xB8000
 
+%include "Data/Macros.asm"
 %include "TextRenderer/Print.asm"
 %include "KeyBoard/KeyBoard.asm"
 %include "Data/String.asm"

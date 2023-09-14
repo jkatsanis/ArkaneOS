@@ -1,5 +1,7 @@
 %define INPUT_BUFFER_SIZE 10
 
+; Note that the input buffer does not control the UI
+
 section .data
     current_index dd 0
     input_buffer db INPUT_BUFFER_SIZE dup(0)    
@@ -28,10 +30,10 @@ clear_input_buffer:
     mov edi, input_buffer
     mov cl, 0
     call clear_input_buffer_loop
+    mov dword [current_index], 0
     ret
 
-clear_input_buffer_loop:
-    
+clear_input_buffer_loop: 
     cmp cl, INPUT_BUFFER_SIZE
     je done_clearing_input_buffer
     mov byte [edi], 0

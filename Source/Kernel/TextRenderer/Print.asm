@@ -24,6 +24,9 @@ print_string_line:
     jmp print_string_line
 
 print_char:
+    cmp al, ENTER_SYMBOL
+    je print_char_exit
+
     mov edi, VIDEO_MEM  
     
     mov ecx, [cursor_y]    
@@ -38,6 +41,9 @@ print_char:
     
     stosw
     ret 
+
+print_char_exit:
+    ret
 
 print_char_line:
     call print_char
