@@ -21,10 +21,6 @@ compare_command_loop:
     jmp compare_command_loop
 
 compare_command_loop_not_found:
-    ; Printing a message for not found command
-    mov esi, command_not_found 
-    call print_string
-
     mov dl, 0
     ret
 
@@ -42,9 +38,34 @@ compare_command_loop_final:
 ; HELP
 prepare_help_command:
     call help_command
-    jmp continue_command_help
+    ret
 
 help_command:   
-    mov esi, help_command_msg
+    mov esi, help_command_msg_1
     call print_string
+
+    call write_command
+
+    mov esi, help_command_msg_2
+    call print_string
+
+    call write_command
+    mov esi, help_command_msg_3
+    call print_string
+
+    call write_command
+    mov esi, help_command_msg_4
+    call print_string
+
+    ret
+
+; CLEAR
+
+prepare_clear_command:
+    call clear_command
+    ret
+clear_command:
+    mov esi, help_command_msg_4
+    call print_string
+    call clear_terminal
     ret

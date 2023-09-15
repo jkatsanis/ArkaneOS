@@ -7,9 +7,20 @@ no_enter: db "no enter key pressed", 0
 shell_text: db "ArkaneOS --> ", 0
 
 ; Terminal command
+; HELP
 %define SEARCH_HELP_SIZE 4
 search_help: db "HELP", 0
-help_command_msg: db "Hello this is a help command", 0
+help_command_msg_1: db "ArkaneOS, literally first verison", 0
+help_command_msg_2: db  "WS    :    Write bytes to a sector", 0
+help_command_msg_3: db  "RS    :    Read all 512 bytes from a sector", 0
+help_command_msg_4: db  "CLEAR :    Clears the terminal", 0
+
+; CLEAR
+%define CLEAR_COMMAND_SIZE 5    
+search_clear: db "CLEAR", 0
+
+
+; Terminal auto messages
 
 command_not_found: db "Command was not found", 0
 

@@ -23,6 +23,10 @@ print_string_line:
     inc dword [cursor_x]    
     jmp print_string_line
 
+print_string_on_new_line:   
+    call create_new_line
+    call print_string
+    ret
 print_char:
     cmp al, ENTER_SYMBOL
     je print_char_exit
@@ -73,4 +77,9 @@ done_string_line:
     ret
 
 done_string:
+    ret
+
+reset_cursor:
+    mov dword [cursor_x], 0
+    mov dword [cursor_y], 0
     ret

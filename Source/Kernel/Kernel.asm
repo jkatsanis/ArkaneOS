@@ -7,11 +7,7 @@
 %include "Terminal/Terminal.asm"
 
 kernel_setup:
-    mov edi, VIDEO_MEM 
-    mov rax, 0x1f201f201f201f20
-    mov ecx, 500
-    mov [VIDEO_MEM], rax
-    rep stosq
+    call clear_terminal
     call write_command
     call kernel_main
 
