@@ -5,6 +5,8 @@
 %include "KeyBoard/KeyBoard.asm"
 %include "Data/String.asm"
 %include "Terminal/Terminal.asm"
+%include "Disk/Disk.asm"
+%include "TextRenderer/PrintHex.asm"
 
 kernel_setup:
     call clear_terminal
@@ -13,10 +15,15 @@ kernel_setup:
 
 kernel_main:
 
-    call read_key
-    call check_for_sent_command
+    ; call read_key
+    ; call check_for_sent_command
 
+    ; call write_sector
+    ; call read_sector
 
-    jmp kernel_main
+    call print_hex
+
+    jmp $
+
 
 times KERNEL_SIZE+512-($-$$) db 0   ; + 512 bc fucking bootloader

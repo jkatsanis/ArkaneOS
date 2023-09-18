@@ -6,7 +6,7 @@ read_key:
     call check_key
     cmp bl, 1
     jne read_key
-
+    
     call send_ack_flag
 
     mov dl, al
