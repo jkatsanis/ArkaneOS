@@ -8,20 +8,13 @@
 %include "Disk/Disk.asm"
 %include "TextRenderer/PrintHex.asm"
 
+
 kernel_setup:
     call clear_terminal
     call write_command
     call kernel_main
 
 kernel_main:
-
-    ; call read_key
-    ; call check_for_sent_command
-
-    ; call write_sector
-    ; call read_sector
-
-    call print_hex
 
     jmp $
 

@@ -12,5 +12,6 @@ GDB
 make run
 gdb os.bin
 target remote localhost:1234
+continue
 Close browsers (retarded)
 -> Now debug lol

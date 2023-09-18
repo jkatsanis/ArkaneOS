@@ -2,7 +2,7 @@
 [bits 16]
 
 ; Macros
-%define KERNEL_SIZE 1536 ; Kernel syze in bytes
+%define KERNEL_SIZE 2048 ; Kernel syze in bytes
 
 
 section .text
@@ -32,7 +32,6 @@ ZeroSeg:
     mov dl, 0x80
     mov al, KERNEL_SIZE / 512	
     mov cl, 2		
-    mov bx, 0x100000		
     call readDisk
 
     ; Checking if A20 line is enabled
