@@ -1,8 +1,9 @@
 %define INPUT_BUFFER_SIZE 20
 
-; Note that the input buffer does not control the UI
+; Note that the input buffer does not control the UI a bit 
 
 section .data
+    bEnter_key_found: db 0
     current_index dd 0
     input_buffer db INPUT_BUFFER_SIZE dup(0)    
 
@@ -25,6 +26,18 @@ add_buffer_overflow:
     ret
 
 ; Clear buffer
+
+clear_input_buffer_condition:
+    mov al, [bEnter_key_found]
+    cmp al, 1
+    je .clear_input_buffer_on_enter
+
+    ret
+
+    .clear_input_buffer_on_enter:   
+        mov byte [bEnter_key_found], 0
+        call clear_input_buffer
+        ret
 
 clear_input_buffer:
     mov edi, input_buffer

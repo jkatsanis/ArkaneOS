@@ -1,7 +1,7 @@
 OS_NAME := ArkaneOS
 RELEASE_DIR := ../Bin/Release
 DEBUG_DIR := ../Bin/Debug
-INCLUDE := -IBoot -IKernel -IKernel/KeyBoard -IKernel/Terminal Boot/Bootloader.asm
+INCLUDE := -IBoot -IKernel Boot/Bootloader.asm
 
 # RELEASE
 

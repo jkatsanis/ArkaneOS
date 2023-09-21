@@ -1,6 +1,3 @@
-%include "KeyTable.asm"
-%include "InputBuffer.asm"
-
 read_key:
     in al, 0x60
     call check_key
@@ -18,16 +15,15 @@ read_key:
 check_key:
     mov esi, 0
     call check_key_released
-    check_key_exit:
     ret
 
 key_not_found:
     mov bl, 0
-    jmp check_key_exit
-
+    ret
+    
 key_found:
     mov bl, 1
-    jmp check_key_exit
+    ret
 
 check_key_released:
     cmp al, [map + esi] 
@@ -46,6 +42,7 @@ check_key_released:
 
     cmp al, 0xFF
     jne key_found
+    ret
 
 send_ack_flag:
     push ax

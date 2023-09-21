@@ -1,5 +1,3 @@
-%include "Commands.asm"
-
 ; Write the default ArkaneOS ---> comand top left
 write_command:
     mov esi, shell_text
@@ -26,11 +24,12 @@ check_for_sent_command_loop:
     jmp check_for_sent_command_loop
 
 enter_key_not_found:
+    mov byte [bEnter_key_found], 0
     ret
 
 enter_key_found:
     call process_command  
-    call clear_input_buffer
+    mov byte [bEnter_key_found], 1
     ret    
 
 ; process command after pressing enter
@@ -65,6 +64,13 @@ execute_command:
     call compare_command_setup
     cmp dl, 1
     je prepare_clear_command
+
+    ; WS
+    mov esi, search_ws
+    mov ebx, WS_COMMAND_SIZE
+    call compare_command_setup
+    cmp dl, 1
+    je prepare_wa_command
 
     ; Printing a message for not found command
     mov esi, command_not_found 
