@@ -1,5 +1,3 @@
-%define VIDEO_MEM 0xB8000
-
 %include "Data/Macros.asm"
 %include "Data/String.asm"
 
@@ -23,13 +21,11 @@ kernel_cleanup:
     ret
 
 kernel_main:
-    call read_key
+    call get_input_wait_for_enter
+    call process_command    
 
-    call check_for_sent_command
-    
     ; Cleanup
     call kernel_cleanup
     jmp kernel_main
-
 
 times KERNEL_SIZE+512-($-$$) db 0   ; + 512 bc fucking bootloader

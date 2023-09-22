@@ -5,19 +5,20 @@ prepare_help_command:
     ret
 
 help_command:   
+    call create_new_line
     mov esi, help_command_msg_1
     call print_string
 
-    call write_command
 
+    call create_new_line
     mov esi, help_command_msg_2
     call print_string
 
-    call write_command
+    call create_new_line
     mov esi, help_command_msg_3
     call print_string
 
-    call write_command
+    call create_new_line
     mov esi, help_command_msg_4
     call print_string
 
@@ -36,10 +37,24 @@ clear_command:
 
 ; WA
 prepare_wa_command:
+    call clear_input_buffer
+
+    mov esi, wa_command_msg_1   
+    call print_string_on_new_line
+    
     call wa_command
     ret
 
 wa_command:
-    mov al, 'A'
-    call print_char
+    call get_input_wait_for_enter
+
+    ; Got a value 
+    mov al, [input_buffer + 0]
+    sub al, '0'
+
+
+
+    inf_loop:
+    jmp inf_loop
+
     ret

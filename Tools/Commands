@@ -10,7 +10,7 @@ NEED TO RUN THIS WITH ROOT
 
 GDB
 make run
-gdb os.bin
+gdb ../Bin/Debug/ArkaneOS.bin
 target remote localhost:1234
 continue
 Close browsers (retarded)

@@ -4,12 +4,21 @@ write_command:
     call print_string_on_new_line
     ret
 
+get_input_wait_for_enter:
+    call read_key
+    call check_for_sent_command
+    mov al, [bEnter_key_found]
+    cmp al, 0
+    je get_input_wait_for_enter
+    ret
+
+; receive command (controlled by enter)
+; Returns in the bEnter_key_found 1, when the enter key was found in input buffer
+; Does not call any command execute stuff
 check_for_sent_command:
     mov edi, 0 ; inti counter
     call check_for_sent_command_loop
     ret
-
-; receive command (controlled by enter)
 check_for_sent_command_loop:
     mov cl, ENTER_SYMBOL ; 0x9C is the enter released thingy
 
@@ -28,14 +37,11 @@ enter_key_not_found:
     ret
 
 enter_key_found:
-    call process_command  
     mov byte [bEnter_key_found], 1
     ret    
 
-; process command after pressing enter
+; process command after pressing enter -> controlled in kernel.asm
 process_command:
-    call write_command
-
     call execute_command
 
     call write_command
@@ -73,6 +79,7 @@ execute_command:
     je prepare_wa_command
 
     ; Printing a message for not found command
+    call create_new_line
     mov esi, command_not_found 
     call print_string
 

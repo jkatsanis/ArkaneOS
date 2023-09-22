@@ -23,6 +23,7 @@ search_clear: db "CLEAR", 0
 %define WS_COMMAND_SIZE 2
 search_ws: db "WA", 0
 
+wa_command_msg_1: db "Enter value: ", 0
 
 ; Terminal auto messages
 

@@ -1,1 +1,2 @@
 %define ENTER_SYMBOL 0x9C
+%define VIDEO_MEM 0xB8000
