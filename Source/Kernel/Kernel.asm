@@ -17,7 +17,7 @@ kernel_setup:
     call kernel_main
 
 kernel_cleanup:
-    call clear_input_buffer_condition
+    call clear_input_buffer
     ret
 
 kernel_main:

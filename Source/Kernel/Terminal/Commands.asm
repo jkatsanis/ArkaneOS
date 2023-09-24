@@ -51,8 +51,22 @@ wa_command:
     ; Got a value 
     mov al, [input_buffer + 0]
     sub al, '0'
+    push rax
 
+    ; Clearing the buffer after using the value
+    call clear_input_buffer
 
+    mov esi, wa_command_msg_2
+    call print_string_on_new_line
+
+    call get_input_wait_for_enter
+
+    pop rax
+    mov byte [0xBF00], al
+        
+    mov al, byte [0xBF00]
+    add al, '0'
+    call print_char
 
     inf_loop:
     jmp inf_loop

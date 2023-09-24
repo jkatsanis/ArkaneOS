@@ -27,17 +27,6 @@ add_buffer_overflow:
 
 ; Clear buffer
 
-clear_input_buffer_condition:
-    mov al, [bEnter_key_found]
-    cmp al, 1
-    je .clear_input_buffer_on_enter
-
-    ret
-
-    .clear_input_buffer_on_enter:   
-        call clear_input_buffer
-        ret
-
 clear_input_buffer:
     mov byte [bEnter_key_found], 0
     mov edi, input_buffer

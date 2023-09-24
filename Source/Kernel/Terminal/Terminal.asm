@@ -4,6 +4,9 @@ write_command:
     call print_string_on_new_line
     ret
 
+; Please cleanup yourself the bEtner_key_found flag!!
+; Or you call clear_input_buffer
+; The input buffer and the 
 get_input_wait_for_enter:
     call read_key
     call check_for_sent_command
