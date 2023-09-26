@@ -61,6 +61,10 @@ wa_command:
 
     call get_input_wait_for_enter
     call print_input_buffer
+
+    mov dl, 0
+    call add_to_buffer
+    call string_to_int
     
     inf_loop:
     jmp inf_loop

@@ -8,6 +8,7 @@ section .data
     input_buffer db INPUT_BUFFER_SIZE dup(0)    
 
 add_to_buffer:
+    ; dl the data of the buffer
     mov cl, [current_index]
     cmp cl, INPUT_BUFFER_SIZE
     jge add_buffer_overflow     
@@ -37,7 +38,6 @@ print_input_buffer:
         cmp ecx, edx
         je .print_done
 
-        push rax
         push rdx
         push rsi
         push rbx
@@ -52,7 +52,6 @@ print_input_buffer:
         pop rbx
         pop rsi
         pop rdx 
-        pop rax
 
         inc esi
         inc ecx
