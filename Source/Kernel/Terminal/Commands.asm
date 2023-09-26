@@ -45,27 +45,49 @@ prepare_wa_command:
     call wa_command
     ret
 
+section .data
+    testi: db 0
+    result db 0          ; Initialize to 0
+    result_len equ 10 
+
 wa_command:
     call get_input_wait_for_enter
 
     ; Got a value 
-    mov al, [input_buffer + 0]
-    sub al, '0'
     push rax
+    mov esi, input_buffer
+    mov edx, [current_index]
+    mov ebx, edx
+    dec ebx
+    call string_to_int
+    mov byte [testi], al
+    pop rax
 
-    ; Clearing the buffer after using the value
     call clear_input_buffer
 
     mov esi, wa_command_msg_2
     call print_string_on_new_line
 
     call get_input_wait_for_enter
-    call print_input_buffer
 
-    mov dl, 0
-    call add_to_buffer
+    push rax
+    mov esi, input_buffer
+    mov edx, dword [current_index]
+    mov ebx, edx
+    dec ebx
     call string_to_int
+    mov edi, 0x000
+    add edi, eax
+    pop rax
+
+    mov al, [testi]
+
+    mov byte [edi], al
+    mov dl, byte [edi]
+
+    ; dl contains the value from the address of the input
     
+
     inf_loop:
     jmp inf_loop
 

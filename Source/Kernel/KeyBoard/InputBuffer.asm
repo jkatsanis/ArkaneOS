@@ -29,9 +29,12 @@ add_buffer_overflow:
 
 print_input_buffer:
     mov esi, input_buffer
-    mov ecx, 0 
-    mov edx, dword [current_index]
+
+    mov ecx, dword [current_index]
+    mov edx, ecx
     dec edx
+
+    mov ecx, 0
 
     .print_loop:      
         mov al, [esi]

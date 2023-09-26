@@ -1,6 +1,9 @@
 HEX_PATTERN_64: db '0x****', 0
 
+HEX_PATTERN_8: db '0x*', 0
+
 print_hex:
+    ; dx input
     mov esi, HEX_PATTERN_64
     mov bx, dx
     shr bx, 12
@@ -30,3 +33,4 @@ print_hex:
 
     call print_string
     ret
+

@@ -19,6 +19,9 @@ compile_debug:
 run_debug: 
 	qemu-system-x86_64 -s -S -hda $(DEBUG_DIR)/$(OS_NAME).bin
 
+run_gdb:
+	gdb ../Bin/Debug/ArkaneOS.bin
+
 # CLEAN
 
 clean: 

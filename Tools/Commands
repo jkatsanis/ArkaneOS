@@ -6,6 +6,8 @@ export DISPLAY=:1
 
 cd ../home/usr/Dev/ArkaneOS/Source
 
+cd dev/ArkaneOS/Source
+
 NEED TO RUN THIS WITH ROOT
 
 GDB
