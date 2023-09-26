@@ -6,6 +6,7 @@ section .data
 
 inc_cursor_x:
     inc dword [cursor_x]
+    ret
 
 print_string:
     lodsb
@@ -27,6 +28,8 @@ print_string_on_new_line:
     call create_new_line
     call print_string
     ret
+
+; PLEASE NOTE THAT this method does not push any registers, it will just override em haha
 print_char:
     cmp al, ENTER_SYMBOL
     je print_char_exit
@@ -44,6 +47,7 @@ print_char:
     add edi, ecx
     
     stosw
+
     ret 
 
 print_char_exit:

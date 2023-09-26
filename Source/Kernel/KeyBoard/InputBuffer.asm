@@ -25,6 +25,42 @@ add_buffer_overflow:
     call print_string
     ret
 
+
+print_input_buffer:
+    mov esi, input_buffer
+    mov ecx, 0 
+    mov edx, dword [current_index]
+    dec edx
+
+    .print_loop:      
+        mov al, [esi]
+        cmp ecx, edx
+        je .print_done
+
+        push rax
+        push rdx
+        push rsi
+        push rbx
+        push rcx
+        push rdi
+
+        call print_char
+        call inc_cursor_x
+
+        pop rdi
+        pop rcx
+        pop rbx
+        pop rsi
+        pop rdx 
+        pop rax
+
+        inc esi
+        inc ecx
+        jmp .print_loop
+
+    .print_done:
+        ret
+
 ; Clear buffer
 
 clear_input_buffer:

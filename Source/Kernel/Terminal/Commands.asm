@@ -60,14 +60,8 @@ wa_command:
     call print_string_on_new_line
 
     call get_input_wait_for_enter
-
-    pop rax
-    mov byte [0xBF00], al
-        
-    mov al, byte [0xBF00]
-    add al, '0'
-    call print_char
-
+    call print_input_buffer
+    
     inf_loop:
     jmp inf_loop
 
