@@ -47,8 +47,6 @@ prepare_wa_command:
 
 section .data
     testi: db 0
-    result db 0          ; Initialize to 0
-    result_len equ 10 
 
 wa_command:
     call get_input_wait_for_enter
@@ -85,8 +83,7 @@ wa_command:
     mov byte [edi], al
     mov dl, byte [edi]
 
-    ; dl contains the value from the address of the input
-    
+
 
     inf_loop:
     jmp inf_loop
