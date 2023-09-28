@@ -91,7 +91,7 @@ process_command:
 
 clear_terminal:
     mov edi, VIDEO_MEM 
-    mov rax, 0x1f201f201f201f20
+    mov rax, SCREEN_COLOR
     mov ecx, 500
     mov [VIDEO_MEM], rax
     rep stosq

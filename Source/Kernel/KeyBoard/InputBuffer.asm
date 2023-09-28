@@ -40,21 +40,8 @@ print_input_buffer:
         cmp ecx, edx
         je .print_done
 
-        push rdx
-        push rsi
-        push rbx
-        push rcx
-        push rdi
-
         call print_char
-        call inc_cursor_x
-
-        pop rdi
-        pop rcx
-        pop rbx
-        pop rsi
-        pop rdx 
-
+        
         inc esi
         inc ecx
         jmp .print_loop

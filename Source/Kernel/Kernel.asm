@@ -22,10 +22,11 @@ kernel_cleanup:
     ret
 
 kernel_main:
+    call get_input_wait_for_enter
+    call process_command    
 
-    mov ax, 20
-    call print_hex_8
-
-    jmp $
+    ; Cleanup
+    call kernel_cleanup
+    jmp kernel_main
 
 times KERNEL_SIZE+512-($-$$) db 0   ; + 512 bc fucking bootloader

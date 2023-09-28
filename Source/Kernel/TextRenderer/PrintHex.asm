@@ -60,19 +60,21 @@ print_hex_8:
     .calc_done:
         mov ah, al           ; The remainder need to be still in hex 
         call get_hex_value
-        mov [HEX_PATTERN_8 + 2], dl
-        mov esi, HEX_PATTERN_8
-        call print_string
+        call .print_hex_string
         jmp .print_hex_exit
     
     .convert_1_value:
+        call .print_hex_string
+        jmp .print_hex_exit
+
+    .print_hex_string:
         mov [HEX_PATTERN_8 + 2], dl
         mov esi, HEX_PATTERN_8
+        mov rax, SCREEN_COLOR       ; For whatever reason this method modifys rax (screen shit) and i need to reset it
         call print_string
-        jmp .print_hex_exit
         ret
 
-    .print_hex_exit
+    .print_hex_exit:
         pop rdi
         pop rdx
         pop rcx
