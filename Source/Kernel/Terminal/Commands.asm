@@ -83,7 +83,7 @@ wa_command:
     mov byte [edi], al
     mov dl, byte [edi]
 
-
+    call print_hex_8 
 
     inf_loop:
     jmp inf_loop

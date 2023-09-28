@@ -13,6 +13,10 @@ run:
 
 # DEBUG
 
+debug:
+	make compile_debug
+	make run_debug
+
 compile_debug:
 	nasm -f bin $(INCLUDE) -g -o $(DEBUG_DIR)/$(OS_NAME).bin
 
