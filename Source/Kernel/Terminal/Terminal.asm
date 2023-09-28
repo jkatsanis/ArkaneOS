@@ -1,7 +1,7 @@
 ; Write the default ArkaneOS ---> comand top left
 write_command:
     mov esi, shell_text
-    call print_string_on_new_line
+    call print_string
     ret
 
 ; Please cleanup yourself the bEtner_key_found flag!!
@@ -9,10 +9,6 @@ write_command:
 ; The input buffer and the 
 get_input_wait_for_enter:
     call read_key
-    call check_for_sent_command
-    mov al, [bEnter_key_found]
-    cmp al, 0
-    je get_input_wait_for_enter
     ret
 
 ; receive command (controlled by enter)

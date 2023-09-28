@@ -9,12 +9,41 @@ inc_cursor_x:
     ret
 
 print_string:
-    lodsb
-    cmp al, 0
-    je done_string 
-    call print_char
-    inc dword [cursor_x]    
-    jmp print_string
+    push rbx
+    push rcx
+    push rdx
+    jmp .print_string_loop
+    .done_loop:
+    pop rbx
+    pop rcx
+    pop rdx
+    ret
+
+    ; returns here already
+    .print_string_loop:
+        lodsb
+        cmp al, 0
+        je .done_loop 
+        call .print_char_string
+        inc dword [cursor_x]    
+        jmp .print_string_loop
+
+    ; PLEASE NOTE THAT this method does not push any registers, it will just override em haha   
+    .print_char_string:
+        cmp al, ENTER_SYMBOL
+        je .print_char_exit_string
+        mov edi, VIDEO_MEM    
+        mov ecx, [cursor_y]    
+        mov edx, [cursor_x]      
+        mov ebx, 80     
+        imul ecx, ebx      
+        add ecx, edx       
+        shl ecx, 1 
+        add edi, ecx    
+        stosw
+        ret 
+    .print_char_exit_string:
+        ret
 
 print_string_line:
     lodsb
@@ -29,10 +58,13 @@ print_string_on_new_line:
     call print_string
     ret
 
-; PLEASE NOTE THAT this method does not push any registers, it will just override em haha
 print_char:
+    push rax
+    push rbx
+    push rcx
+    push rdx
     cmp al, ENTER_SYMBOL
-    je print_char_exit
+    je .print_char_exit
 
     mov edi, VIDEO_MEM  
     
@@ -43,15 +75,15 @@ print_char:
     imul ecx, ebx      
     add ecx, edx       
     shl ecx, 1 
-
     add edi, ecx
-    
-    stosw
-
-    ret 
-
-print_char_exit:
-    ret
+    stosw 
+ 
+    .print_char_exit:
+        pop rbx
+        pop rcx
+        pop rdx
+        pop rax
+        ret
 
 print_char_line:
     call print_char

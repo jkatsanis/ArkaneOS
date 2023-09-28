@@ -1,52 +1,68 @@
 read_key:
-    in al, 0x60
-    call check_key
-    cmp bl, 1
-    jne read_key
-    
-    call send_ack_flag
-
-    mov dl, al
-    call add_to_buffer
-    
-    call print_char_column
-    ret
-
-check_key:
-    mov esi, 0
-    call check_key_released
-    ret
-
-key_not_found:
-    mov bl, 0
+    call .read_key_setup
     ret
     
-key_found:
-    mov bl, 1
-    ret
+    .read_key_loop:
+        in al, 0x60
+        call .check_key     ; Calls the check key routine, the key will be in dl
+        cmp bl, 1           ; If a key gets found bl will be set to 1
+        jne .read_key_loop
+        ret
 
-check_key_released:
-    cmp al, [map + esi] 
-    je test
+        .check_key:
+            mov esi, 0
+            call .check_key_released
+            ret
 
-    cmp esi, MAP_SIZE
-    je key_not_found
+        .check_key_released:
+            cmp al, [map + esi] 
+            je .continue
 
-    add esi, 2
+            cmp esi, MAP_SIZE
+            je .key_not_found
 
-    jmp check_key_released
+            add esi, 2
 
-    test:
-    mov dl, al
-    call find_value
+            jmp .check_key_released
 
-    cmp al, 0xFF
-    jne key_found
-    ret
+            .continue:
+            mov dl, al      ; Moving the KeyCode into dl to find the actual char representation4
+            call find_value
 
-send_ack_flag:
-    push ax
-    mov al, 0xFA 
-    out 0x60, al 
-    pop ax
-    ret
+            cmp al, 0xFF    ; Find value returns 0xFF when its NOT found
+            jne .key_found
+            jmp .key_not_found
+
+            .key_not_found:
+                mov bl, 0
+                ret
+            
+            .key_found:
+                mov bl, 1
+                ret
+
+     
+    .send_ack_flag:
+        push rax
+        mov al, 0xFA 
+        out 0x60, al 
+        pop rax
+        ret
+
+    .read_key_setup:
+        push rbx
+        push rcx
+        push rdx 
+        
+        call .read_key_loop
+        call .send_ack_flag
+        mov dl, al
+        call add_to_buffer    
+
+        call print_char_column
+
+        pop rbx
+        pop rcx
+        pop rdx
+        ret
+

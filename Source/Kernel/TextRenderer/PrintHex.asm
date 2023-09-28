@@ -1,6 +1,7 @@
-HEX_PATTERN_64: db '0x****', 0
-HEX_TABLE_64: db '0123456789abcdef'
-HEX_PATTERN_8: db '0x**', 0
+section .data
+    HEX_PATTERN_64: db "0x****", 0
+    HEX_TABLE_64: db "0123456789abcdef"
+    HEX_PATTERN_8: db "0x**", 0
 
 print_hex:
     ; dx input
@@ -35,8 +36,7 @@ print_hex:
     ret
 
 print_hex_8:    
-    mov ecx, 3
-    mov ax, 127
+    mov cx, ax
 
     .calc_loop:
         mov bl, 16
@@ -44,8 +44,10 @@ print_hex_8:
 
         call get_hex_value ; ah contains already the value
 
-        mov [HEX_PATTERN_8 + ecx], dl
-        dec ecx
+        cmp cx, 15          ; Hardcoding it lol
+        jle .convert_1_value ;Because hahaaha
+
+        mov [HEX_PATTERN_8 + 3], dl
         cmp al, 16
         jl .calc_done
         movzx ax, al
@@ -58,8 +60,13 @@ print_hex_8:
         mov [HEX_PATTERN_8 + 2], dl
         mov esi, HEX_PATTERN_8
         call print_string
-        
-    ret
+        ret
+    
+    .convert_1_value:
+        mov [HEX_PATTERN_8 + 2], dl
+        mov esi, HEX_PATTERN_8
+        call print_string
+        ret
 
 
 get_hex_value:

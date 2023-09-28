@@ -82,7 +82,7 @@ wa_command:
 
     mov byte [edi], al
     mov dl, byte [edi]
-
+    movzx ax, dl
     call print_hex_8 
 
     inf_loop:
