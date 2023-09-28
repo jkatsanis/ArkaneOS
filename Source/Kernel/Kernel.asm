@@ -3,6 +3,7 @@
 
 %include "Standard/Stringf.asm"
 
+%include "Terminal/Address.asm"
 %include "KeyBoard/KeyTable.asm"
 %include "KeyBoard/InputBuffer.asm"
 %include "Terminal/Commands.asm"
@@ -21,8 +22,10 @@ kernel_cleanup:
     ret
 
 kernel_main:
-    call get_input_wait_for_enter
-    
-    jmp kernel_main
+
+    mov ax, 20
+    call print_hex_8
+
+    jmp $
 
 times KERNEL_SIZE+512-($-$$) db 0   ; + 512 bc fucking bootloader

@@ -1,3 +1,7 @@
+; Reads a key from the keyboard, stores the bEnter_key_found flag, and prints the char and stores the char
+;    in the input buffer
+; --------------------
+; Output : bEnter_key_found, the char in the input buffer wroten
 read_key:
     call .read_key_setup
     ret
@@ -59,7 +63,7 @@ read_key:
         mov dl, al
         call add_to_buffer    
 
-        call print_char_column
+        call print_char
 
         pop rbx
         pop rcx

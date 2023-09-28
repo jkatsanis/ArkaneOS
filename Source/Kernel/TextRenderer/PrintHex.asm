@@ -35,12 +35,16 @@ print_hex:
     call print_string
     ret
 
-print_hex_8:    
+print_hex_8:  
+    push rbx
+    push rcx
+    push rdx
+    push rdi
     mov cx, ax
-
+    
     .calc_loop:
         mov bl, 16
-        div bl ; div ax / bx
+        div bl ; div ax / bx ; After division, AL = (quotient), AH = (remainder)
 
         call get_hex_value ; ah contains already the value
 
@@ -54,18 +58,25 @@ print_hex_8:
         jmp .calc_loop
 
     .calc_done:
-        ; The remainder need to be still in hex 
-        mov ah, al
+        mov ah, al           ; The remainder need to be still in hex 
         call get_hex_value
         mov [HEX_PATTERN_8 + 2], dl
         mov esi, HEX_PATTERN_8
         call print_string
-        ret
+        jmp .print_hex_exit
     
     .convert_1_value:
         mov [HEX_PATTERN_8 + 2], dl
         mov esi, HEX_PATTERN_8
         call print_string
+        jmp .print_hex_exit
+        ret
+
+    .print_hex_exit
+        pop rdi
+        pop rdx
+        pop rcx
+        pop rbx
         ret
 
 

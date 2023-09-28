@@ -4,9 +4,7 @@ section .data
     cursor_x dd 0
     cursor_y dd 0
 
-inc_cursor_x:
-    inc dword [cursor_x]
-    ret
+; String 
 
 print_string:
     push rbx
@@ -45,18 +43,13 @@ print_string:
     .print_char_exit_string:
         ret
 
-print_string_line:
-    lodsb
-    cmp al, 0
-    je done_string_line  
-    call print_char
-    inc dword [cursor_x]    
-    jmp print_string_line
 
 print_string_on_new_line:   
     call create_new_line
     call print_string
     ret
+
+; Char
 
 print_char:
     push rax
@@ -83,18 +76,16 @@ print_char:
         pop rcx
         pop rdx
         pop rax
+        call inc_cursor_x
         ret
 
-print_char_line:
+print_char_on_new_line:
+    call create_new_line
     call print_char
     jmp done_string_line
     ret
 
-print_char_column:
-    call print_char
-    inc dword [cursor_x]
-    call check_for_new_line
-    ret
+; Line
 
 check_for_new_line:
     mov al, [cursor_x]
@@ -112,10 +103,13 @@ done_string_line:
     inc dword [cursor_y]
     ret
 
-done_string:
-    ret
+; Cursor
 
 reset_cursor:
     mov dword [cursor_x], 0
     mov dword [cursor_y], 0
+    ret
+
+inc_cursor_x:
+    inc dword [cursor_x]
     ret

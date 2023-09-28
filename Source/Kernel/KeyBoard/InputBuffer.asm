@@ -11,20 +11,19 @@ add_to_buffer:
     ; dl the data of the buffer
     mov cl, [current_index]
     cmp cl, INPUT_BUFFER_SIZE
-    jge add_buffer_overflow     
+    jge .add_buffer_overflow     
 
     mov edi, input_buffer  
     add edi, [current_index]
     mov byte [edi], dl
 
-    inc dword [current_index] 
-    
+    inc dword [current_index]    
     ret
 
-add_buffer_overflow:
-    mov esi, input_buffer_overflow
-    call print_string
-    ret
+    .add_buffer_overflow:
+        mov esi, input_buffer_overflow
+        call print_string
+        ret
 
 
 print_input_buffer:
@@ -69,17 +68,17 @@ clear_input_buffer:
     mov byte [bEnter_key_found], 0
     mov edi, input_buffer
     mov cl, 0
-    call clear_input_buffer_loop
+    call .clear_input_buffer_loop
     mov dword [current_index], 0
     ret
 
-clear_input_buffer_loop: 
-    cmp cl, INPUT_BUFFER_SIZE
-    je done_clearing_input_buffer
-    mov byte [edi], 0
-    inc edi
-    inc cl
-    jmp clear_input_buffer_loop
+    .clear_input_buffer_loop: 
+        cmp cl, INPUT_BUFFER_SIZE
+        je .done_clearing_input_buffer
+        mov byte [edi], 0
+        inc edi
+        inc cl
+        jmp .clear_input_buffer_loop
 
-done_clearing_input_buffer:
-    ret
+    .done_clearing_input_buffer:
+        ret
