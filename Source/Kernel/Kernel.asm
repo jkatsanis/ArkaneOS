@@ -24,7 +24,7 @@ kernel_cleanup:
 kernel_main:
     call get_input_wait_for_enter
     call process_command    
-
+    
     ; Cleanup
     call kernel_cleanup
     jmp kernel_main

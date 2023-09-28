@@ -1,36 +1,36 @@
 section .data
-    HEX_PATTERN_64: db "0x****", 0
-    HEX_TABLE_64: db "0123456789abcdef"
-    HEX_PATTERN_8: db "0x**", 0
+    hex_pattern_64: db "0x****", 0
+    hex_table_64: db "0123456789abcdef"
+    hex_pattern_8: db "0x**", 0
 
 print_hex:
     ; dx input
-    mov esi, HEX_PATTERN_64
+    mov esi, hex_pattern_64
     mov bx, dx
     shr bx, 12
     mov al, bl
     add al, '0'
-    mov [HEX_PATTERN_64 + 2], al
+    mov [hex_pattern_64 + 2], al
 
     mov bx, dx
     shr bx, 8
     and bx, 0x000f
     mov al, bl
     add al, '0'
-    mov [HEX_PATTERN_64 + 3], al
+    mov [hex_pattern_64 + 3], al
 
     mov bx, dx
     shr bx, 4
     and bx, 0x000f
     mov al, bl
     add al, '0'
-    mov [HEX_PATTERN_64 + 4], al
+    mov [hex_pattern_64 + 4], al
 
     mov bx, dx
     and bx, 0x000f
     mov al, bl
     add al, '0'
-    mov [HEX_PATTERN_64 + 5], al
+    mov [hex_pattern_64 + 5], al
 
     call print_string
     ret
@@ -51,7 +51,7 @@ print_hex_8:
         cmp cx, 15          ; Hardcoding it lol
         jle .convert_1_value ;Because hahaaha
 
-        mov [HEX_PATTERN_8 + 3], dl
+        mov [hex_pattern_8 + 3], dl
         cmp al, 16
         jl .calc_done
         movzx ax, al
@@ -68,8 +68,8 @@ print_hex_8:
         jmp .print_hex_exit
 
     .print_hex_string:
-        mov [HEX_PATTERN_8 + 2], dl
-        mov esi, HEX_PATTERN_8
+        mov [hex_pattern_8 + 2], dl
+        mov esi, hex_pattern_8
         mov rax, SCREEN_COLOR       ; For whatever reason this method modifys rax (screen shit) and i need to reset it
         call print_string
         ret
@@ -79,6 +79,7 @@ print_hex_8:
         pop rdx
         pop rcx
         pop rbx
+        call clear_hex_pattern_8
         ret
 
 
@@ -91,5 +92,13 @@ get_hex_value:
     add esi, eax
 
     mov dl, [esi] ; dl contains the actual value in ASCII
+    pop rax
+    ret
+
+clear_hex_pattern_8:
+    push rax
+    mov al, '*'
+    mov [hex_pattern_8 + 3], al
+    mov [hex_pattern_8 + 2], al
     pop rax
     ret
