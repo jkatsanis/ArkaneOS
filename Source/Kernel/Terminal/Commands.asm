@@ -40,3 +40,9 @@ prepare_wa_command:
     
     call wa_command
     ret
+
+; RA
+
+prepare_ra_command:
+    call ra_command
+    ret

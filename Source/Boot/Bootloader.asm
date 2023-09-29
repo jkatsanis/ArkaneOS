@@ -2,7 +2,7 @@
 [bits 16]
 
 ; Macros
-%define KERNEL_SIZE 2048 ; Kernel syze in bytes
+%define KERNEL_SIZE 4096 ; Kernel syze in bytes
 
 
 section .text

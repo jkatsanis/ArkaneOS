@@ -3,36 +3,36 @@
 ; ebx the size of the string
 compare_command_setup:
     mov ecx, 0
-    call compare_command_loop
+    call .compare_command_loop
     ret
 
-compare_command_loop:
-    lodsb
-    stosb
+    .compare_command_loop:
+        lodsb
+        stosb
 
-    cmp ecx, [current_index]
-    je compare_command_loop_final
+        cmp ecx, [current_index]
+        je .compare_command_loop_final
 
-    cmp al, [input_buffer, ecx]
-    jne compare_command_loop_not_found
+        cmp al, [input_buffer, ecx]
+        jne .compare_command_loop_not_found
 
-    inc ecx
+        inc ecx
 
-    jmp compare_command_loop
+        jmp .compare_command_loop
 
-compare_command_loop_not_found:
-    mov dl, 0
-    ret
+        .compare_command_loop_not_found:
+            mov dl, 0
+            ret
 
-compare_command_loop_found:
-    mov dl, 1
-    ret
+        .compare_command_loop_found:
+            mov dl, 1
+            ret
 
-compare_command_loop_final:
-    dec ecx
-    cmp ecx, ebx
-    je compare_command_loop_found
-    jmp compare_command_loop_not_found
+        .compare_command_loop_final:
+            dec ecx
+            cmp ecx, ebx
+            je .compare_command_loop_found
+            jmp .compare_command_loop_not_found
 
 string_to_int:
     ; Push and pop rax (safety) -> (pop after using lol)
@@ -63,3 +63,30 @@ string_to_int:
         pop rbx
         pop rcx
         ret
+
+copy_string_size:
+    ; esi pointer to the src string
+    ; edi pointer to the dest string
+    ; ecx size of src string
+
+    push rdx
+    push rax
+    mov edx, 0 ; Counter 
+
+    .copy_string_loop:
+        mov al, [esi]
+        mov byte [edi], al
+
+        inc edi
+        inc esi
+        inc edx
+        cmp edx, ecx
+        jl .copy_string_loop
+
+    pop rax
+    pop rdx
+
+    ; Adding the 0 terminator
+    mov byte [esi], 0
+
+    ret

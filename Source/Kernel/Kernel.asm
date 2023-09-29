@@ -11,7 +11,6 @@
 %include "KeyBoard/KeyBoard.asm"
 %include "Terminal/Terminal.asm"
 %include "TextRenderer/PrintHex.asm"
-
 kernel_setup:
     call clear_terminal
     call write_command
@@ -28,5 +27,5 @@ kernel_main:
     ; Cleanup
     call kernel_cleanup
     jmp kernel_main
-
+    
 times KERNEL_SIZE+512-($-$$) db 0   ; + 512 bc fucking bootloader

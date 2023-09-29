@@ -79,7 +79,14 @@ process_command:
         mov ebx, WS_COMMAND_SIZE
         call compare_command_setup
         cmp dl, 1
-        je prepare_wa_command
+        je prepare_wa_command    
+
+        ; RA
+        mov esi, search_ra
+        mov ebx, 2
+        call compare_command_setup
+        cmp dl, 1
+        je prepare_ra_command
 
         ; Printing a message for not found command
         mov esi, command_not_found 

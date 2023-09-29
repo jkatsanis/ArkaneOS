@@ -25,6 +25,14 @@ section .data
     search_ws: db "WA", 0
     wa_command_msg_1: db "Enter value: ", 0
     wa_command_msg_2: db "Enter a address: ", 0
+    wa_command_msg_3: db "Address: ", 0
+    wa_command_msg_4: db "has value: ", 0
+
+    ; RA
+    %define RA_COMMAND_SIZE 2
+    search_ra: db "RA", 0
+    ra_command_msg_1: db "Enter a address: ", 0
+
 
     ; Terminal auto messages
 

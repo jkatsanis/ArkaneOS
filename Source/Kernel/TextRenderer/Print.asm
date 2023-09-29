@@ -7,6 +7,7 @@ section .data
 ; String 
 
 print_string:
+    push rdi
     push rbx
     push rcx
     push rdx
@@ -15,6 +16,7 @@ print_string:
     pop rbx
     pop rcx
     pop rdx
+    pop rdi
     ret
 
     ; returns here already
