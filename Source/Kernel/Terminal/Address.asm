@@ -35,19 +35,7 @@ wa_command:
     ; Moving the value into the address
     mov byte [edi], al
 
-    mov esi, wa_command_msg_3
-    call print_string_on_new_line
-
-    mov esi, input_buffer
-    call print_string   
-
-    mov esi, wa_command_msg_4
-    call print_string
-
-    ; Getting the value back from the address to print it out
-    mov dl, byte [edi]
-    movzx ax, dl
-    call print_hex_8 
+    call print_address_and_value
 
     call .cleanup
     ret
@@ -74,7 +62,21 @@ ra_command:
     add edi, eax
     pop rax
 
+    call print_address_and_value
+    ret
+
+print_address_and_value:
+    mov esi, wa_command_msg_3
+    call print_string_on_new_line
+
+    mov esi, input_buffer
+    call print_string   
+
+    mov esi, wa_command_msg_4
+    call print_string
+
+    ; Getting the value back from the address to print it out
     mov dl, byte [edi]
     movzx ax, dl
-    call print_hex_8 
+    call print_hex_8
     ret

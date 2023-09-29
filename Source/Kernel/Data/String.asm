@@ -33,7 +33,6 @@ section .data
     search_ra: db "RA", 0
     ra_command_msg_1: db "Enter a address: ", 0
 
-
     ; Terminal auto messages
 
     command_not_found: db "Command was not found", 0
