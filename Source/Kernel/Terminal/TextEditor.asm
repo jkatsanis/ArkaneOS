@@ -7,17 +7,16 @@ section .data
     text_adress_table_size: dd 0
 
 wt_command:
-    call clear_terminal
-    call clear_input_buffer
-    call get_input_wait_for_enter
+    call clear_terminal 
+    call get_address_input 
 
-    mov edi, 0x0000
-    add edi, 555
-
-    mov edx, edi
+    mov edx, edi                ; Adding the adress the start adress to the table
     call add_text_table
 
-    mov edx, [current_index]
+    call clear_input_buffer
+    call get_input_wait_for_enter
+    
+    mov edx, [current_index]    ; Getting the size of the value (chars) input buffer
     call add_text_table 
 
     ; Init
@@ -35,7 +34,7 @@ wt_command:
 
     .write_done:    
 
-
+    ; TODO gscheides read 
 
 
     mov edi, [text_adress_table + 0]
@@ -51,7 +50,7 @@ wt_command:
         inc ecx
         call .wt_loop_read
 
-    .read_done
+    .read_done:
 
     ret
 
