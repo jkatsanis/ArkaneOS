@@ -54,6 +54,7 @@ print_string_on_new_line:
 ; Char
 
 print_char:
+    push rdi
     push rax
     push rbx
     push rcx
@@ -78,6 +79,7 @@ print_char:
         pop rcx
         pop rdx
         pop rax
+        pop rdi
         call inc_cursor_x
         ret
 

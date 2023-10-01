@@ -11,30 +11,34 @@ section .data
     ; HELP
     %define SEARCH_HELP_SIZE 4
     search_help: db "HELP", 0
-    help_command_msg_1: db "ArkaneOS, literally first verison", 0
+    help_command_msg_1: db  "ArkaneOS, literally first verison", 0
     help_command_msg_2: db  "WA    :    Write stuff to a memory address", 0
     help_command_msg_3: db  "RA    :    Read stuff from a address", 0
     help_command_msg_4: db  "CLEAR :    Clears the terminal", 0
+    help_command_msg_5: db  "WT    :    Write text at a specifc memory address", 0
 
     ; CLEAR
     %define CLEAR_COMMAND_SIZE 5    
     search_clear: db "CLEAR", 0
 
-    ; WA
-    %define WS_COMMAND_SIZE 2
+    ; WA (Write adress)
+    %define WA_COMMAND_SIZE 2
     search_ws: db "WA", 0
     wa_command_msg_1: db "Enter value: ", 0
-    wa_command_msg_2: db "Enter a address: ", 0
     wa_command_msg_3: db "Address: ", 0
     wa_command_msg_4: db "has value: ", 0
 
-    ; RA
+    ; RA (Read address)
     %define RA_COMMAND_SIZE 2
     search_ra: db "RA", 0
-    ra_command_msg_1: db "Enter a address: ", 0
+
+    ; WT (Write Text editor)
+    %define WT_COMMAND_SIZE 2
+    search_wt: db "WT", 0
+
+    ; General message
+    adress_input: db "Enter a adress: ", 0
 
     ; Terminal auto messages
-
     command_not_found: db "Command was not found", 0
-
     command_found: db "Command found", 0

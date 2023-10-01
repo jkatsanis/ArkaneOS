@@ -63,30 +63,38 @@ process_command:
         ; HELP
         mov esi, search_help
         mov ebx, SEARCH_HELP_SIZE
-        call compare_command_setup
+        call compare_string
         cmp dl, 1
         je prepare_help_command
 
         ; ClEAR
         mov esi, search_clear
         mov ebx, CLEAR_COMMAND_SIZE
-        call compare_command_setup
+        call compare_string
         cmp dl, 1
         je prepare_clear_command
 
         ; WS
         mov esi, search_ws
-        mov ebx, WS_COMMAND_SIZE
-        call compare_command_setup
+        mov ebx, WA_COMMAND_SIZE
+        call compare_string
         cmp dl, 1
         je prepare_wa_command    
 
         ; RA
         mov esi, search_ra
-        mov ebx, 2
-        call compare_command_setup
+        mov ebx, RA_COMMAND_SIZE
+        call compare_string
         cmp dl, 1
         je prepare_ra_command
+
+        ; WP
+        mov esi, search_wt
+        mov ebx, WT_COMMAND_SIZE
+        call compare_string
+        cmp dl, 1
+        je prepare_wt_command
+    
 
         ; Printing a message for not found command
         mov esi, command_not_found 

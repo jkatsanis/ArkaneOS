@@ -36,12 +36,14 @@ print_hex:
     ret
 
 print_hex_8:  
+    ; ax input hex
+
     push rbx
     push rcx
     push rdx
     push rdi
     mov cx, ax
-    
+
     .calc_loop:
         mov bl, 16
         div bl ; div ax / bx ; After division, AL = (quotient), AH = (remainder)

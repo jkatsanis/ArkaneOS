@@ -1,7 +1,7 @@
 ; Returns 1 in cl if found the value in that string
 ; esi, the string which should be equal to the input buffer
 ; ebx the size of the string
-compare_command_setup:
+compare_string:
     mov ecx, 0
     call .compare_command_loop
     ret
@@ -89,4 +89,32 @@ copy_string_size:
     ; Adding the 0 terminator
     mov byte [esi], 0
 
+    ret
+
+
+get_address_input:
+    ; edi output of the input address
+
+    push rdx
+    push rbx
+
+    call clear_input_buffer
+
+    mov esi, adress_input
+    call print_string_on_new_line
+
+    call get_input_wait_for_enter
+
+    push rax
+    mov esi, input_buffer
+    mov edx, dword [current_index]
+    mov ebx, edx
+    dec ebx
+    call string_to_int
+    mov edi, 0x000
+    add edi, eax
+    pop rax
+
+    pop rbx
+    pop rdx
     ret

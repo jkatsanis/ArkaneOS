@@ -3,6 +3,7 @@
 
 %include "Standard/Stringf.asm"
 
+%include "Terminal/TextEditor.asm"
 %include "Terminal/Address.asm"
 %include "KeyBoard/KeyTable.asm"
 %include "KeyBoard/InputBuffer.asm"
@@ -11,6 +12,8 @@
 %include "KeyBoard/KeyBoard.asm"
 %include "Terminal/Terminal.asm"
 %include "TextRenderer/PrintHex.asm"
+
+
 kernel_setup:
     call clear_terminal
     call write_command

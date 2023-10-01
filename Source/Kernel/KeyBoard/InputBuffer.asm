@@ -1,5 +1,3 @@
-%define INPUT_BUFFER_SIZE 20
-
 ; Note that the input buffer does not control the UI a bit 
 
 section .data

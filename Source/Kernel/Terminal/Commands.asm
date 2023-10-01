@@ -17,6 +17,9 @@ prepare_help_command:
         mov esi, help_command_msg_4
         call print_string_on_new_line
 
+        mov esi, help_command_msg_5
+        call print_string_on_new_line
+
         ret
 
 ; CLEAR
@@ -34,10 +37,6 @@ prepare_clear_command:
 ; WA
 prepare_wa_command:
     call clear_input_buffer
-
-    mov esi, wa_command_msg_1   
-    call print_string_on_new_line
-    
     call wa_command
     ret
 
@@ -45,4 +44,10 @@ prepare_wa_command:
 
 prepare_ra_command:
     call ra_command
+    ret
+
+; WT
+
+prepare_wt_command:
+    call wt_command
     ret
