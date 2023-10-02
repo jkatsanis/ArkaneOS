@@ -13,14 +13,14 @@ wa_command:
     mov edx, [current_index]
     mov ebx, edx
     dec ebx
-    call string_to_int
+    call string_to_int_32
     mov byte [address_value_input_buffer], al            ; Storing the value which i got through the input in the buffer
     pop rax
 
     call get_address_input
 
     mov al, [address_value_input_buffer]        ; Getting the value from the adress
-    mov byte [edi], al                  ; Moving the value into the address
+    mov byte [rdi], al                  ; Moving the value into the address
 
     call print_address_and_value
 
@@ -49,7 +49,7 @@ print_address_and_value:
     call print_string
 
     ; Getting the value back from the address to print it out
-    mov dl, byte [edi]
+    mov dl, byte [rdi]
     movzx ax, dl
     call print_hex_8
     ret

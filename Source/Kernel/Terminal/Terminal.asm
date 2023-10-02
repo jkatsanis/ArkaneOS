@@ -8,12 +8,22 @@ write_command:
 ; Or you call clear_input_buffer
 ; The input buffer and the 
 get_input_wait_for_enter:
-    call read_key
-    call .check_for_sent_command
-    mov al, [bEnter_key_found]
-    cmp al, 0
-    je get_input_wait_for_enter
-    ret
+
+    push rax
+    push rcx
+    push rdi
+
+    get_input_loop:
+        call read_key
+        call .check_for_sent_command
+        mov al, [bEnter_key_found]
+        cmp al, 0
+        je get_input_loop
+
+        pop rdi
+        pop rcx
+        pop rax
+        ret
 
     ; receive command (controlled by enter)
     ; Returns in the bEnter_key_found 1, when the enter key was found in input buffer

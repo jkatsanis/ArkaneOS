@@ -34,7 +34,7 @@ compare_string:
             je .compare_command_loop_found
             jmp .compare_command_loop_not_found
 
-string_to_int:
+string_to_int_32:
     ; Push and pop rax (safety) -> (pop after using lol)
     ; Input esi -> buffer
     ; Input ebx -> size of buffer
@@ -110,9 +110,10 @@ get_address_input:
     mov edx, dword [current_index]
     mov ebx, edx
     dec ebx
-    call string_to_int
-    mov edi, 0x000
-    add edi, eax
+    call string_to_int_32
+    movsx rdx, eax   ; Sign-extend eax into rdx
+    mov rdi, 0x000
+    add rdi, rdx
     pop rax
 
     pop rbx
