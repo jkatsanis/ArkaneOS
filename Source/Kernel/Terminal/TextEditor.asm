@@ -5,7 +5,6 @@ section .data
     adress_table: dq 20 dup(0)     
 
 wt_command:
-    call clear_terminal
     call get_address_input
 
     mov rsi, rdi
@@ -35,12 +34,50 @@ wt_command:
 
     .write_done:    
 
-    mov rbx, 0
-    call read_text
+    ret
+
+rt_command:
+    call get_address_input
+    
+    mov rsi, rdi
+    call get_index
+
+    call read_text_table
 
     ret
 
-read_text:
+get_index:
+    ; Searches for the index with the inputed adres
+    ; input -> rsi
+    ; output -> rbx (index) -1 when not found
+
+    push rdi
+    mov rbx, 0 ; counter
+
+    .search_loop:
+        mov rdi, rbx
+        call read_taxt_adress_table_index
+
+        cmp rdx, rsi
+        je .found
+
+        cmp rbx, [adress_table_size]
+        je .not_found
+        inc rbx
+        jmp .search_loop
+
+    .found:
+        pop rdi
+        ret
+
+    .not_found:
+        mov rbx, -1
+        mov esi, rt_not_found
+
+        pop rdi
+        ret
+
+read_text_table:
     ; Reads text until the count from the table goes to 0
     ; rbx -> index of the adres
 
@@ -59,7 +96,7 @@ read_text:
     mov rbx, rdx
     pop rdi
 
-    mov rcx, 0
+    mov ecx, 0
 
     .wt_loop_read:
         cmp rcx, rbx
@@ -72,8 +109,8 @@ read_text:
 
     .read_done:
 
-    pop rdi
     pop rcx
+    pop rdi
     ret
 
 

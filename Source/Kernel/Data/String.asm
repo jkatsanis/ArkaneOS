@@ -16,6 +16,7 @@ section .data
     help_command_msg_3: db  "RA    :    Read stuff from a address", 0
     help_command_msg_4: db  "CLEAR :    Clears the terminal", 0
     help_command_msg_5: db  "WT    :    Write text at a specifc memory address", 0
+    help_command_msg_6: db  "RT    :    Read text at a specifc memory address", 0
 
     ; CLEAR
     %define CLEAR_COMMAND_SIZE 5    
@@ -35,6 +36,11 @@ section .data
     ; WT (Write Text editor)
     %define WT_COMMAND_SIZE 2
     search_wt: db "WT", 0
+
+    ; RT (Read Text editor)
+    %define RT_COMMAND_SIZE 2
+    search_rt: db "RT", 0
+    rt_not_found: db "Adress was not found in the table!"
 
     ; General message
     adress_input: db "Enter a adress: ", 0

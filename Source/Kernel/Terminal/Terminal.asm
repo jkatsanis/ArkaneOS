@@ -98,13 +98,19 @@ process_command:
         cmp dl, 1
         je prepare_ra_command
 
-        ; WP
+        ; WT
         mov esi, search_wt
         mov ebx, WT_COMMAND_SIZE
         call compare_string
         cmp dl, 1
         je prepare_wt_command
-    
+
+        ; RT
+        mov esi, search_rt
+        mov ebx, RT_COMMAND_SIZE
+        call compare_string
+        cmp dl, 1
+        je prepare_rt_command
 
         ; Printing a message for not found command
         mov esi, command_not_found 

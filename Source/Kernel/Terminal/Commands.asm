@@ -20,6 +20,9 @@ prepare_help_command:
         mov esi, help_command_msg_5
         call print_string_on_new_line
 
+        mov esi, help_command_msg_6
+        call print_string_on_new_line
+
         ret
 
 ; CLEAR
@@ -50,4 +53,10 @@ prepare_ra_command:
 
 prepare_wt_command:
     call wt_command
+    ret
+
+; RT
+
+prepare_rt_command:
+    call rt_command
     ret
