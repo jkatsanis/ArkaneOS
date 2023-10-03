@@ -3,7 +3,8 @@
 
 %include "Standard/Stringf.asm"
 
-%include "Terminal/TextEditor.asm"
+%include "Terminal/TextEditor/TextTable.asm"
+%include "Terminal/TextEditor/TextEditor.asm"
 %include "Terminal/Address.asm"
 %include "KeyBoard/KeyTable.asm"
 %include "KeyBoard/InputBuffer.asm"

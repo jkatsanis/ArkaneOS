@@ -1,5 +1,3 @@
-%define END_OF_LINE 50
-
 section .data
     cursor_x dd 0
     cursor_y dd 0
@@ -7,6 +5,7 @@ section .data
 ; String 
 
 print_string:
+    push rax
     push rdi
     push rbx
     push rcx
@@ -17,6 +16,7 @@ print_string:
     pop rcx
     pop rdx
     pop rdi
+    pop rax
     ret
 
     ; returns here already
@@ -25,7 +25,7 @@ print_string:
         cmp al, 0
         je .done_loop 
         call .print_char_string
-        inc dword [cursor_x]    
+        call inc_cursor_x   
         jmp .print_string_loop
 
     ; PLEASE NOTE THAT this method does not push any registers, it will just override em haha   
@@ -116,4 +116,11 @@ reset_cursor:
 
 inc_cursor_x:
     inc dword [cursor_x]
-    ret
+    mov al, [cursor_x]
+    cmp al, END_OF_LINE
+    jne .exit
+
+    call create_new_line
+
+    .exit:
+    ret 

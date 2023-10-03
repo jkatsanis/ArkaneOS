@@ -36,6 +36,7 @@ section .data
     ; WT (Write Text editor)
     %define WT_COMMAND_SIZE 2
     search_wt: db "WT", 0
+    wt_command_enter_value: db "Enter text: ", 0
 
     ; RT (Read Text editor)
     %define RT_COMMAND_SIZE 2

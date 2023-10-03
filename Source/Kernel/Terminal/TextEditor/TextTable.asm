@@ -2,50 +2,10 @@ section .data
     adress_table_size: dq 0
 
     ; First "Key -> start" second "Key -> amount of characters"
-    adress_table: dq 20 dup(0)     
+    adress_table: dq TEXT_ADRESS_BUFFER_SIZE dup(0)     
 
-wt_command:
-    call get_address_input
 
-    push rdi
-
-    mov rsi, rdi
-    call add_text_adress_table
-
-    call clear_input_buffer
-    call get_input_wait_for_enter
-
-    mov ebx, dword [current_index]
-    movsx rsi, ebx
-    call add_text_adress_table
-
-    pop rdi       ; adress of the input
-    mov ecx, 0
-
-    .wt_loop_write:                     ; Writing the input buffer to the adress
-        cmp ecx, [current_index]
-        jge .write_done
-        mov al, [input_buffer + ecx]
-        mov byte [rdi], al
-        inc ecx
-        inc rdi
-        jmp .wt_loop_write
-
-    .write_done:    
-
-    ret
-
-rt_command:
-    call get_address_input
-    
-    mov rsi, rdi
-    call get_index
-
-    call read_text_table
-
-    ret
-
-get_index:
+get_adress_index:
     ; Searches for the index with the inputed adres
     ; input -> rsi
     ; output -> rbx (index)
@@ -56,7 +16,7 @@ get_index:
 
     .search_loop:
         mov rdi, rbx
-        call read_taxt_adress_table_index
+        call read_text_adress
 
         cmp rdx, rsi
         je .found
@@ -94,14 +54,14 @@ read_text_table:
     
     mov rdi, rbx
 
-    call read_taxt_adress_table_index
+    call read_text_adress
     mov rdi, rdx
 
     inc rbx
 
     push rdi
     mov rdi, rbx
-    call read_taxt_adress_table_index
+    call read_text_adress
     mov rbx, rdx
     pop rdi
 
@@ -126,9 +86,7 @@ read_text_table:
     ret
 
 
-; Text adres table
-
-read_taxt_adress_table_index:
+read_text_adress:
     ; rdi input -> index
     ; rdx output
 
@@ -138,7 +96,7 @@ read_taxt_adress_table_index:
     mov rdx, [rdx]     
     ret
 
-add_text_adress_table:
+add_text_adress:
     ; rsi input -> value
     ; rdx output
 
