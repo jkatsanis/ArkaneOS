@@ -15,6 +15,7 @@ The features aren't that much yet, you got a simple terminal which is in kernel 
 - Terminal
     - Help
     - Clear
+- Keyboard input
 
 ## Technical info
 
@@ -23,7 +24,7 @@ The features aren't that much yet, you got a simple terminal which is in kernel 
 - No paging (I want to kind of implement a way for the user to work high level with numbers instead of hex numbers for memory adresses (to achieve that im probably gonna create my own small language) , also i want to implement a whole "new" memory manager without paging)
 - The entire OS is ram based, no acess to disk
 
-Here is a iamge of the current state
+Here is a image of the current state
 
 ![Image](Tools/ArkaneOS.png)
 
