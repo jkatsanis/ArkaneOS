@@ -7,6 +7,8 @@ section .data
 wt_command:
     call get_address_input
 
+    push rdi
+
     mov rsi, rdi
     call add_text_adress_table
 
@@ -17,10 +19,7 @@ wt_command:
     movsx rsi, ebx
     call add_text_adress_table
 
-    mov rdi, 0          ; Reading back the adres inputed
-    call read_taxt_adress_table_index
-
-    mov rdi, rdx
+    pop rdi       ; adress of the input
     mov ecx, 0
 
     .wt_loop_write:                     ; Writing the input buffer to the adress
@@ -49,7 +48,8 @@ rt_command:
 get_index:
     ; Searches for the index with the inputed adres
     ; input -> rsi
-    ; output -> rbx (index) -1 when not found
+    ; output -> rbx (index)
+    ; dl 1 when found 0 when not found
 
     push rdi
     mov rbx, 0 ; counter
@@ -63,28 +63,37 @@ get_index:
 
         cmp rbx, [adress_table_size]
         je .not_found
+
         inc rbx
         jmp .search_loop
 
     .found:
         pop rdi
+        mov dl, 1
         ret
 
     .not_found:
-        mov rbx, -1
-        mov esi, rt_not_found
-
         pop rdi
+
+        ; Error codes
+        mov esi, rt_not_found
+        call print_string
+        mov dl, 0
         ret
 
 read_text_table:
     ; Reads text until the count from the table goes to 0
     ; rbx -> index of the adres
+    ; changes the value of the rbx register
+    cmp dl, 0
+    je .exit
 
     push rdi
     push rcx
+    push rdx
     
     mov rdi, rbx
+
     call read_taxt_adress_table_index
     mov rdi, rdx
 
@@ -105,12 +114,15 @@ read_text_table:
         call print_char
         inc rdi
         inc rcx
-        call .wt_loop_read
+        jmp .wt_loop_read
 
     .read_done:
 
+    pop rdx
     pop rcx
     pop rdi
+
+    .exit:
     ret
 
 
@@ -128,6 +140,7 @@ read_taxt_adress_table_index:
 
 add_text_adress_table:
     ; rsi input -> value
+    ; rdx output
 
     mov rdx, [adress_table_size]      
     imul rdx, rdx, 8    

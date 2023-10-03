@@ -40,7 +40,7 @@ section .data
     ; RT (Read Text editor)
     %define RT_COMMAND_SIZE 2
     search_rt: db "RT", 0
-    rt_not_found: db "Adress was not found in the table!"
+    rt_not_found: db "Adress was not found in the table!", 0
 
     ; General message
     adress_input: db "Enter a adress: ", 0
