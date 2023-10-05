@@ -1,0 +1,5 @@
+Account -> 
+    einloggen
+    special account memory
+        -> allocated in bestimmer space in ram
+        -> nur accesbar mit richtingen pin  

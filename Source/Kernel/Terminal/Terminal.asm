@@ -8,6 +8,7 @@ write_command:
 ; Or you call clear_input_buffer
 ; The input buffer and the 
 get_input_wait_for_enter:
+    call clear_input_buffer
 
     push rax
     push rcx
@@ -111,6 +112,20 @@ process_command:
         call compare_string
         cmp dl, 1
         je prepare_rt_command
+
+        ; USR
+        mov esi, search_usr
+        mov ebx, USR_COMMAND_SIZE
+        call compare_string
+        cmp dl, 1
+        je prepare_usr_command
+        
+        ; REG
+        mov esi, search_reg
+        mov ebx, REG_COMMAND_SIZE
+        call compare_string
+        cmp dl, 1
+        je prepare_reg_command
 
         ; Printing a message for not found command
         mov esi, command_not_found 

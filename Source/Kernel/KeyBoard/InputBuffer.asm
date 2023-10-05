@@ -50,11 +50,13 @@ print_input_buffer:
 ; Clear buffer
 
 clear_input_buffer:
+
     mov byte [bEnter_key_found], 0
     mov edi, input_buffer
     mov cl, 0
     call .clear_input_buffer_loop
     mov dword [current_index], 0
+    .done_clearing_input_buffer:
     ret
 
     .clear_input_buffer_loop: 
@@ -64,6 +66,3 @@ clear_input_buffer:
         inc edi
         inc cl
         jmp .clear_input_buffer_loop
-
-    .done_clearing_input_buffer:
-        ret

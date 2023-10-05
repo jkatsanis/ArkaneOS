@@ -3,19 +3,25 @@
 
 %include "Standard/Stringf.asm"
 
+%include "Terminal/User/Register.asm"
+%include "Terminal/User/User.asm"
 %include "Terminal/TextEditor/TextTable.asm"
 %include "Terminal/TextEditor/TextEditor.asm"
 %include "Terminal/Address.asm"
+%include "Terminal/Terminal.asm"
+%include "Terminal/Commands.asm"
+
 %include "KeyBoard/KeyTable.asm"
 %include "KeyBoard/InputBuffer.asm"
-%include "Terminal/Commands.asm"
-%include "TextRenderer/Print.asm"
 %include "KeyBoard/KeyBoard.asm"
-%include "Terminal/Terminal.asm"
-%include "TextRenderer/PrintHex.asm"
 
+%include "TextRenderer/PrintHex.asm"
+%include "TextRenderer/Print.asm"
 
 kernel_setup:
+    ; usr
+    call usr_setup
+
     call clear_terminal
     call write_command
     call kernel_main

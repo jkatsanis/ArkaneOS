@@ -3,20 +3,20 @@ wt_command:
 
     push rdi
 
-    mov rsi, rdi
-    call add_text_adress
+    mov rsi, rdi    
+    call add_text_adress               ; Adding the adress to the text table
 
     mov esi, wt_command_enter_value
     call print_string_on_new_line
 
-    call clear_input_buffer
-    call get_input_wait_for_enter
+    call clear_input_buffer         
+    call get_input_wait_for_enter       
 
     mov ebx, dword [current_index]
     movsx rsi, ebx
-    call add_text_adress
+    call add_text_adress                ; Adding the string size to the text table
 
-    pop rdi       ; adress of the input
+    pop rdi                             ; adress of the input
     mov ecx, 0
 
     .wt_loop_write:                     ; Writing the input buffer to the adress

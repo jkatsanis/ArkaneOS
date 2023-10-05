@@ -5,12 +5,11 @@ section .data
     adress_table: dq TEXT_ADRESS_BUFFER_SIZE dup(0)     
 
 
+; Searches for the index with the inputed adres
+; input -> rsi
+; output -> rbx (index)
+; dl 1 when found 0 when not found
 get_adress_index:
-    ; Searches for the index with the inputed adres
-    ; input -> rsi
-    ; output -> rbx (index)
-    ; dl 1 when found 0 when not found
-
     push rdi
     mov rbx, 0 ; counter
 
@@ -41,10 +40,10 @@ get_adress_index:
         mov dl, 0
         ret
 
+; Reads text until the count from the table goes to 0
+; changes the value of the rbx register
+; rbx -> index of the adres
 read_text_table:
-    ; Reads text until the count from the table goes to 0
-    ; rbx -> index of the adres
-    ; changes the value of the rbx register
     cmp dl, 0
     je .exit
 
@@ -86,20 +85,18 @@ read_text_table:
     ret
 
 
+; rdi -> input index
+; rdx -> output
 read_text_adress:
-    ; rdi input -> index
-    ; rdx output
-
     mov rdx, rdi         
     imul rdx, rdx, 8    
     lea rdx, [adress_table + rdx] 
     mov rdx, [rdx]     
     ret
 
+; rsi input -> value
+; rdx output
 add_text_adress:
-    ; rsi input -> value
-    ; rdx output
-
     mov rdx, [adress_table_size]      
     imul rdx, rdx, 8    
     lea rdx, [adress_table + rdx] 

@@ -17,6 +17,7 @@ section .data
     help_command_msg_4: db  "CLEAR :    Clears the terminal", 0
     help_command_msg_5: db  "WT    :    Write text at a specifc memory address", 0
     help_command_msg_6: db  "RT    :    Read text at a specifc memory address", 0
+    help_command_msg_7: db  "USR   :    Gives current information of the user", 0
 
     ; CLEAR
     %define CLEAR_COMMAND_SIZE 5    
@@ -42,6 +43,17 @@ section .data
     %define RT_COMMAND_SIZE 2
     search_rt: db "RT", 0
     rt_not_found: db "Adress was not found in the table!", 0
+
+    ; USR (User info)
+    %define USR_COMMAND_SIZE 3
+    search_usr: db "USR", 0
+    usr_command_msg_1: db "Current user name: ", 0
+
+    ; REG (Register (create a user account))
+    %define REG_COMMAND_SIZE 3
+    search_reg: db "REG", 0
+    reg_command_msg_1: db "Enter user name: ", 0
+
 
     ; General message
     adress_input: db "Enter a adress: ", 0

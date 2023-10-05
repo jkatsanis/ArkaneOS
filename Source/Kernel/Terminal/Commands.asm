@@ -23,6 +23,9 @@ prepare_help_command:
         mov esi, help_command_msg_6
         call print_string_on_new_line
 
+        mov esi, help_command_msg_7
+        call print_string_on_new_line
+
         ret
 
 ; CLEAR
@@ -59,4 +62,16 @@ prepare_wt_command:
 
 prepare_rt_command:
     call rt_command
+    ret
+
+; USR
+
+prepare_usr_command:
+    call usr_command
+    ret
+
+; REG
+
+prepare_reg_command:
+    call reg_command
     ret

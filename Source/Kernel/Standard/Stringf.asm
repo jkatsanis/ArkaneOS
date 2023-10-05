@@ -34,11 +34,11 @@ compare_string:
             je .compare_command_loop_found
             jmp .compare_command_loop_not_found
 
+; Push and pop rax (safety) -> (pop after using lol)
+; Input esi -> buffer
+; Input ebx -> size of buffer
+; Output eax
 string_to_int_32:
-    ; Push and pop rax (safety) -> (pop after using lol)
-    ; Input esi -> buffer
-    ; Input ebx -> size of buffer
-    ; Output eax
     push rcx
     push rbx
     push rdx
@@ -64,11 +64,10 @@ string_to_int_32:
         pop rcx
         ret
 
+; esi pointer to the src string
+; edi pointer to the dest string
+; ecx size of src string
 copy_string_size:
-    ; esi pointer to the src string
-    ; edi pointer to the dest string
-    ; ecx size of src string
-
     push rdx
     push rax
     mov edx, 0 ; Counter 
@@ -87,13 +86,14 @@ copy_string_size:
     pop rdx
 
     ; Adding the 0 terminator
-    mov byte [esi], 0
+    mov byte [edi], 0
 
     ret
 
 
+; This method asks for a input adress to input in the terminal and writes that into a register
+; edi -> output of the input address
 get_address_input:
-    ; edi output of the input address
 
     push rdx
     push rbx
