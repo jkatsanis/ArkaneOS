@@ -58,6 +58,9 @@ section .data
     ; General message
     adress_input: db "Enter a adress: ", 0
 
+    string_array_found: db "String found in the array", 0
+    string_array_not_found: db "String not found in the array", 0
+
     ; Terminal auto messages
     command_not_found: db "Command was not found", 0
     command_found: db "Command found", 0

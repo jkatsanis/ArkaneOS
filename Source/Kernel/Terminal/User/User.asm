@@ -4,7 +4,8 @@ section .data
 
     ; MAP of users
         ; Name;Password
-    users: db MAX_USER_AMOUNT*2 dup(0)
+    users: db 100 dup(0)
+    users_size: db 0
 
 usr_setup:
     push rdi
