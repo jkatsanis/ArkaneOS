@@ -11,6 +11,7 @@
 
 ; Print
 %define END_OF_LINE 75
+%define CHAR_ZERO_MARK 23
 
 ; USER
 %define MAX_USER_NAME_SIZE 5

@@ -119,3 +119,56 @@ get_address_input:
     pop rbx
     pop rdx
     ret
+
+; Adds the buffer to the string
+; esi, src buffer
+; edi, dst buffer
+; 
+; ebx, src sice
+; ecx dst size
+add_to_string:
+
+    mov edx, 0
+
+    .add_loop:
+        mov al, byte [esi + edx]
+        mov byte [edi + ecx], al         ; TO user
+
+        inc edx
+        inc ecx
+
+        cmp edx, ebx
+        je .exit
+        jmp .add_loop
+
+    .exit:
+    
+    inc ecx
+    mov byte [edi + ecx], 0
+
+    ret
+
+; String array size
+; ecx, size
+; esi, buffer
+print_string_array:
+
+    mov edx, 0
+
+    cmp ecx, edx
+    je .exit
+
+    call create_new_line
+
+    .print_loop:
+        mov al, byte [esi + edx]
+        call print_char
+
+        inc edx
+
+        cmp edx, ecx
+        je .exit
+        jmp .print_loop
+
+    .exit:
+    ret

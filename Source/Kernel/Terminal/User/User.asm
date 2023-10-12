@@ -5,7 +5,7 @@ section .data
     ; MAP of users
         ; Name;Password
     users: db 100 dup(0)
-    users_size: db 0
+    users_size: dd 0
 
 usr_setup:
     push rdi

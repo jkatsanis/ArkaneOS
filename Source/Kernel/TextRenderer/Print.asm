@@ -32,6 +32,11 @@ print_string:
     .print_char_string:
         cmp al, ENTER_SYMBOL
         je .print_char_exit_string
+
+        cmp al, 0
+        je .zero_add
+        .cont:
+
         mov edi, VIDEO_MEM    
         mov ecx, [cursor_y]    
         mov edx, [cursor_x]      
@@ -42,6 +47,11 @@ print_string:
         add edi, ecx    
         stosw
         ret 
+
+        .zero_add:
+        sub al, 12
+        jmp .cont
+
     .print_char_exit_string:
         ret
 
@@ -62,6 +72,10 @@ print_char:
     cmp al, ENTER_SYMBOL
     je .print_char_exit
 
+    cmp al, 0
+    je .zero_add
+    .cont:
+
     mov edi, VIDEO_MEM  
     
     mov ecx, [cursor_y]    
@@ -75,13 +89,17 @@ print_char:
     stosw 
  
     .print_char_exit:
-        pop rbx
-        pop rcx
         pop rdx
+        pop rcx
+        pop rbx
         pop rax
         pop rdi
         call inc_cursor_x
         ret
+
+    .zero_add:
+        mov al, CHAR_ZERO_MARK
+        jmp .cont
 
 print_char_on_new_line:
     call create_new_line
