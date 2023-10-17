@@ -10,6 +10,7 @@ print_string:
     push rbx
     push rcx
     push rdx
+    call .setup_buffer
     jmp .print_string_loop
     .done_loop:
     pop rbx
@@ -51,6 +52,10 @@ print_string:
         .zero_add:
         sub al, 12
         jmp .cont
+
+    .setup_buffer:
+        mov rax, SCREEN_COLOR
+        ret
 
     .print_char_exit_string:
         ret

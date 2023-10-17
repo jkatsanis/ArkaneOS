@@ -7,7 +7,7 @@ section .data
     users: db 100 dup(0)
     users_size: dd 0
 
-usr_setup:
+user_name_setup:
     push rdi
     mov esi, user_name
     mov byte [esi], '<' 
@@ -25,4 +25,11 @@ usr_command:
 
     mov esi, user_name
     call print_string
+
+    mov esi, usr_command_msg_2
+    call print_string_on_new_line
+
+    mov esi, users
+    mov ecx, [users_size]
+    call print_string_array
     ret

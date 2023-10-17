@@ -1,6 +1,8 @@
 %include "Data/Macros.asm"
 %include "Data/String.asm"
 
+%include "Standard/General.asm"
+%include "Standard/StringArray.asm"
 %include "Standard/Stringf.asm"
 
 %include "Terminal/User/Register.asm"
@@ -20,7 +22,7 @@
 
 kernel_setup:
     ; usr
-    call usr_setup
+    call user_name_setup
 
     call clear_terminal
     call write_command

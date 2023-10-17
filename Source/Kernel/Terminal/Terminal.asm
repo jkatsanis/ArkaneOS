@@ -127,6 +127,20 @@ process_command:
         cmp dl, 1
         je prepare_reg_command
 
+        ; LOG
+        mov esi, search_log
+        mov ebx, LOG_COMMAND_SIZE
+        call compare_string
+        cmp dl, 1
+        je prepare_log_command
+
+        ; OUT
+        mov esi, search_out
+        mov ebx, OUT_COMMAND_SIZE
+        call compare_string
+        cmp dl, 1
+        je prepare_out_command
+
         ; Printing a message for not found command
         mov esi, command_not_found 
         call print_string_on_new_line
@@ -139,7 +153,7 @@ clear_terminal:
     mov edi, VIDEO_MEM 
     mov rax, SCREEN_COLOR
     mov ecx, 500
-    mov [VIDEO_MEM], rax
+    mov qword [VIDEO_MEM], rax
     rep stosq
     call reset_cursor
     ret

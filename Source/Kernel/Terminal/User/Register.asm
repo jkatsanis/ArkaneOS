@@ -16,67 +16,51 @@ reg_command:
 
     add dword [users_size], ebx
     inc dword [users_size]          ; Inc to add the 0 terminator
+    ret 
 
-    mov esi, users
-    mov ecx, [users_size]
-    call print_string_array
 
-    mov esi, usr_command_msg_1
+log_command:
+    mov esi, log_command_msg_1
     call print_string_on_new_line
     
     call get_input_wait_for_enter
     dec byte [current_index]
+    
+    ; search value parameters
+    mov edx, [users_size]
+    mov dword [str_arr_size_params + 0], edx
 
-    mov ecx, 0                              ; user counter (byte cuz yk)
-    mov esi, users                          ; Users array
+    mov edx, [current_index]
+    mov dword [str_arr_size_params + 1], edx
 
-    mov ebx, 0,                             ; input buffer counter
-    mov edi, input_buffer                   ; input buffer data
+    mov esi, users
+    mov edi, input_buffer
 
+    call search_value
+    ; Return value
+    cmp dl, 1
+    je .found
 
-    .compare:
-        mov al, byte [esi + ecx]             ; Users
-        mov dl, byte [edi + ebx]             ; Input
+    .not_found:
+        mov esi, log_command_msg_3
+        call print_string_on_new_line
+        ret
 
-        cmp ebx, [current_index]           ; Comparing the input buffer counter to the size, when we reached it says we counted up                             
-        je .found_setup                         ; all the chars we need to find (Note, need to check for the end of the other string)
-        .cont_f:
+    .found:
+        mov esi, log_command_msg_2
+        call print_string_on_new_line
 
-        cmp ecx, [users_size]                ; Comparing the array counter to the array size, at this point we iterated over the whoel array and couldnt 
-        je .not_found                           ; find a single string equal to the search
+        ; Login as (user)
+        mov esi, input_buffer
+        mov edi, user_name
+        mov ecx, [current_index]
+        call copy_string_size
 
-        cmp al, dl                            ; Comparin the input buffer with the string array
-        je .increment                            ; Incrementing the counter of the input buffer if a char fron the str array was found
-        .cont:
-
-        inc ecx                               ; Incrementing the user array counter
-        jmp .compare
-
-        .cont_f_s:
-            mov ebx, 0
-            jmp .cont_f
-
-        .increment:
-            inc ebx
-            jmp .cont
-
-        .found_setup:   
-
-            inc ecx
-            mov al, byte [esi + ecx]    ; Users
-            cmp al, 0
-            jne .cont_f_s
-
-            mov esi, string_array_found
-            call print_string
-
-            jmp .exit
+    ret     
 
 
-        .not_found:
-            mov esi, string_array_not_found
-            call print_string
-
-        .exit:
-
-    ret 
+out_command:
+    mov esi, user_name
+    call clear_buffer_null_terminator
+    call user_name_setup
+    ret

@@ -10,14 +10,18 @@ section .data
     ; Terminal command
     ; HELP
     %define SEARCH_HELP_SIZE 4
-    search_help: db "HELP", 0
-    help_command_msg_1: db  "ArkaneOS, literally first verison", 0
-    help_command_msg_2: db  "WA    :    Write stuff to a memory address", 0
-    help_command_msg_3: db  "RA    :    Read stuff from a address", 0
-    help_command_msg_4: db  "CLEAR :    Clears the terminal", 0
-    help_command_msg_5: db  "WT    :    Write text at a specifc memory address", 0
-    help_command_msg_6: db  "RT    :    Read text at a specifc memory address", 0
-    help_command_msg_7: db  "USR   :    Gives current information of the user", 0
+    search_help:                db "HELP", 0
+    help_command_msg_1:         db  "ArkaneOS, literally first verison", 0
+    help_command_msg_2:         db  "WA    :    Write stuff to a memory address", 0
+    help_command_msg_3:         db  "RA    :    Read stuff from a address", 0
+    help_command_msg_4:         db  "CLEAR :    Clears the terminal", 0
+    help_command_msg_5:         db  "WT    :    Write text at a specifc memory address", 0
+    help_command_msg_6:         db  "RT    :    Read text at a specifc memory address", 0
+    help_command_msg_user:      db  "USERS      -----------------", 0
+    help_command_msg_7:         db  "USR   :    Gives current information of the user", 0
+    help_command_msg_8:         db  "REG   :    Register a user", 0
+    help_command_msg_9:         db  "LOG   :    Login with a registered user", 0
+    help_command_msg_10:        db  "OUT   :    Logout", 0
 
     ; CLEAR
     %define CLEAR_COMMAND_SIZE 5    
@@ -48,12 +52,24 @@ section .data
     %define USR_COMMAND_SIZE 3
     search_usr: db "USR", 0
     usr_command_msg_1: db "Current user name: ", 0
+    usr_command_msg_2: db "User names available: ", 0
 
     ; REG (Register (create a user account))
     %define REG_COMMAND_SIZE 3
     search_reg: db "REG", 0
-    reg_command_msg_1: db "Enter user name: ", 0
+    reg_command_msg_1: db "Enter user name to register: ", 0
 
+    ; LOG (LOGIN with a registered user)
+    %define LOG_COMMAND_SIZE 3
+    search_log: db "LOG", 0
+    log_command_msg_1: db "Login with a registered user: ", 0
+    log_command_msg_2: db "Succesfully logged in", 0
+    log_command_msg_3: db "Coul not find the user you looking for", 0
+
+    ; OUT (Logout)
+    %define OUT_COMMAND_SIZE 3
+    search_out: db "OUT", 0
+    out_command_msg_1: db "Succesfully logged out", 0
 
     ; General message
     adress_input: db "Enter a adress: ", 0

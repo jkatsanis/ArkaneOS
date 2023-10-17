@@ -23,8 +23,22 @@ prepare_help_command:
         mov esi, help_command_msg_6
         call print_string_on_new_line
 
+        mov esi, help_command_msg_user
+        call print_string_on_new_line
+
         mov esi, help_command_msg_7
         call print_string_on_new_line
+
+        
+        mov esi, help_command_msg_8
+        call print_string_on_new_line
+
+        mov esi, help_command_msg_9
+        call print_string_on_new_line
+
+        mov esi, help_command_msg_10
+        call print_string_on_new_line
+
 
         ret
 
@@ -74,4 +88,14 @@ prepare_usr_command:
 
 prepare_reg_command:
     call reg_command
+    ret
+
+; LOG
+
+prepare_log_command:
+    call log_command
+    ret
+
+prepare_out_command:
+    call out_command
     ret
