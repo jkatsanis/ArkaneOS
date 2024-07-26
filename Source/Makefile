@@ -9,7 +9,7 @@ compile:
 	nasm -f bin $(INCLUDE) -o $(RELEASE_DIR)/$(OS_NAME).bin
 
 run:
-	qemu-system-x86_64 $(RELEASE_DIR)/$(OS_NAME).bin
+	qemu-system-x86_64 -drive format=raw,file=$(RELEASE_DIR)/$(OS_NAME).bin -display curses
 
 # DEBUG
 
