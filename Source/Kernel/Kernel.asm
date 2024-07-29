@@ -1,7 +1,7 @@
 [org 0x8000]
 [bits 64]
 
-%define KERNEL_SIZE 5720 ; Kernel syze in bytes
+%define KERNEL_SIZE 4096 ; Kernel syze in bytes
 
 %include "Data/Macros.asm"
 %include "Data/String.asm"
@@ -25,17 +25,17 @@
 %include "TextRenderer/PrintHex.asm"
 %include "TextRenderer/Print.asm"
 
-section .text 
+section .text
     jmp kernel_setup
     jmp $
 
 kernel_setup:
     ; usr
     
-    hlt
     call user_name_setup
 
     call clear_terminal
+    
     call write_command
     call kernel_main
     ret
@@ -52,4 +52,3 @@ kernel_main:
     call kernel_cleanup
     jmp kernel_main
     
-times KERNEL_SIZE+512-($-$$) db 0   ; + 512 bc fucking bootloader

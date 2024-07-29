@@ -1,6 +1,6 @@
 readDisk:
     pusha
-    mov al, 2	
+    mov al, KERNEL_SIZE / 512	
     mov cl, 2	
     mov ah, 0x02
     mov dl, 0x80
