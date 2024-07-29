@@ -1,3 +1,8 @@
+[org 0x8000]
+[bits 64]
+
+%define KERNEL_SIZE 5720 ; Kernel syze in bytes
+
 %include "Data/Macros.asm"
 %include "Data/String.asm"
 
@@ -20,13 +25,20 @@
 %include "TextRenderer/PrintHex.asm"
 %include "TextRenderer/Print.asm"
 
+section .text 
+    jmp kernel_setup
+    jmp $
+
 kernel_setup:
     ; usr
+    
+    hlt
     call user_name_setup
 
     call clear_terminal
     call write_command
     call kernel_main
+    ret
 
 kernel_cleanup:
     call clear_input_buffer

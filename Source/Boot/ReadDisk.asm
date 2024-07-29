@@ -1,5 +1,7 @@
 readDisk:
     pusha
+    mov al, 2	
+    mov cl, 2	
     mov ah, 0x02
     mov dl, 0x80
     mov ch, 0

@@ -2,7 +2,8 @@ section .data
     hex_pattern_64: db "0x****", 0
     hex_table_64: db "0123456789abcdef"
     hex_pattern_8: db "0x**", 0
-
+    HEX_PATTERN: db '0x****', 0x0a, 0x0d, 0
+    HEX_TABLE: db '0123456789abcdef'
 print_hex:
     ; dx input
     mov esi, hex_pattern_64

@@ -2,7 +2,7 @@
 [bits 16]
 
 ; Macros
-%define KERNEL_SIZE 5120 ; Kernel syze in bytes
+%define KERNEL_SIZE 1024 ; Kernel syze in bytes
 
 
 section .text
@@ -28,10 +28,7 @@ ZeroSeg:
     mov dl, 0x80
     int 0x13
 
-    ; load sectors
-    mov dl, 0x80
-    mov al, KERNEL_SIZE / 512	
-    mov cl, 2		
+    ; load sectors	
     call readDisk
 
     ; Checking if A20 line is enabled
@@ -104,10 +101,11 @@ sector_two:
     mov cr0, eax
 
     lgdt [GDT.Pointer]
-    jmp GDT.Code:kernel_setup
+    
+    jmp 0x08:0x8000
+    
 
 %include "CheckLM.asm"
 %include "Gdt.asm"
 
-[bits 64]
-%include "../Kernel/Kernel.asm"
+times 1024-($-$$) db 0   

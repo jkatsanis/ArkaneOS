@@ -1,13 +1,15 @@
 OS_NAME := ArkaneOS
 RELEASE_DIR := ../Bin/Release
 DEBUG_DIR := ../Bin/Debug
-INCLUDE := -IBoot -IKernel Boot/Bootloader.asm
+INCLUDE := -IBoot Boot/Bootloader.asm
 
 # RELEASE
 
 compile: 
-	nasm -f bin $(INCLUDE) -o $(RELEASE_DIR)/$(OS_NAME).bin
-
+	nasm -f bin $(INCLUDE) -o $(RELEASE_DIR)/Bootloader.bin
+	nasm -f bin -IKernel Kernel/Kernel.asm -o $(RELEASE_DIR)/Kernel.bin
+	cat ${RELEASE_DIR}/Bootloader.bin ${RELEASE_DIR}/Kernel.bin > ${RELEASE_DIR}/ArkaneOS.bin
+	
 run:
 	qemu-system-x86_64 -drive format=raw,file=$(RELEASE_DIR)/$(OS_NAME).bin -display curses
 
